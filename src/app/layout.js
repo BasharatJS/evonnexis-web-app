@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '../context/ThemeContext'
-import Header from '../components/Header/Header'
+import Header from '@/components/header/Header'
 import LoadingPage from '@/components/loader/LoadingPage'
 import Footer from '@/components/footer/Footer'
 
