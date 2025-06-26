@@ -1,0 +1,476 @@
+/* components/CtaSection/CtaSection.module.css */
+
+.ctaSection {
+  position: relative;
+  padding: 8rem 0;
+  background: linear-gradient(
+    135deg,
+    #4f46e5 0%,
+    #7c3aed 25%,
+    #2563eb 50%,
+    #1d4ed8 75%,
+    #3b82f6 100%
+  );
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Typography */
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  border-radius: 2px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Container */
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CTA Button */
+.ctaButton {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e40af;
+  border: none;
+  padding: 1.25rem 3rem;
+  border-radius: 50px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.ctaButton:hover {
+  background: white;
+  color: #1d4ed8;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.buttonText {
+  position: relative;
+  z-index: 3;
+  transition: color 0.3s ease;
+}
+
+.buttonIcon {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover .buttonIcon {
+  transform: translateX(3px);
+}
+
+/* Button Effects */
+.buttonGlow {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  border-radius: 52px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  filter: blur(8px);
+}
+
+.ctaButton:hover .buttonGlow {
+  opacity: 0.7;
+}
+
+.buttonRipple {
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 70%
+  );
+  transform: scale(0);
+  transition: transform 0.6s ease;
+  z-index: 2;
+}
+
+.ctaButton:active .buttonRipple {
+  transform: scale(1);
+}
+
+/* Background Elements */
+.backgroundElements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating Particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.particle1 {
+  top: 20%;
+  left: 10%;
+}
+.particle2 {
+  top: 30%;
+  left: 20%;
+}
+.particle3 {
+  top: 15%;
+  left: 80%;
+}
+.particle4 {
+  top: 25%;
+  left: 90%;
+}
+.particle5 {
+  top: 60%;
+  left: 15%;
+}
+.particle6 {
+  top: 70%;
+  left: 85%;
+}
+.particle7 {
+  top: 80%;
+  left: 25%;
+}
+.particle8 {
+  top: 75%;
+  left: 75%;
+}
+.particle9 {
+  top: 40%;
+  left: 5%;
+}
+.particle10 {
+  top: 50%;
+  left: 95%;
+}
+.particle11 {
+  top: 10%;
+  left: 50%;
+}
+.particle12 {
+  top: 90%;
+  left: 50%;
+}
+.particle13 {
+  top: 35%;
+  left: 70%;
+}
+.particle14 {
+  top: 65%;
+  left: 30%;
+}
+.particle15 {
+  top: 45%;
+  left: 60%;
+}
+
+/* Gradient Orbs */
+.gradientOrb1,
+.gradientOrb2 {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  filter: blur(40px);
+}
+
+.gradientOrb1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(139, 92, 246, 0.2) 50%,
+    transparent 100%
+  );
+  top: -10%;
+  left: -10%;
+}
+
+.gradientOrb2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.3) 0%,
+    rgba(59, 130, 246, 0.2) 50%,
+    transparent 100%
+  );
+  bottom: -5%;
+  right: -5%;
+}
+
+/* Wave Animation */
+.waveContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.03) 75%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+}
+
+/* Grid Pattern */
+.gridPattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ctaSection {
+    padding: 6rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .title {
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    margin-bottom: 2.5rem;
+  }
+
+  .ctaButton {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+  }
+
+  .gradientOrb1 {
+    width: 250px;
+    height: 250px;
+  }
+
+  .gradientOrb2 {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ctaSection {
+    padding: 5rem 0;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .ctaButton {
+    padding: 0.875rem 2rem;
+    font-size: 0.95rem;
+    gap: 0.5rem;
+  }
+
+  .buttonIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gradientOrb1,
+  .gradientOrb2 {
+    display: none;
+  }
+
+  .particle {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+/* Enhanced hover effects for desktop */
+@media (min-width: 769px) {
+  .ctaButton:hover {
+    transform: translateY(-5px) scale(1.05);
+  }
+
+  .title:hover {
+    text-shadow: 0 4px 25px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Theme-specific enhancements */
+.theme-dark .ctaButton {
+  background: rgba(255, 255, 255, 0.98);
+  color: #1e40af;
+}
+
+.theme-dark .ctaButton:hover {
+  background: white;
+  color: #1d4ed8;
+}
+
+.theme-light .ctaButton {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e40af;
+}
+
+.theme-light .ctaButton:hover {
+  background: white;
+  color: #1d4ed8;
+}
+
+/* Additional Animation Classes */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Loading state for button */
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+  border-radius: 50px;
+  z-index: 2;
+}
+
+.ctaButton:hover::before {
+  left: 100%;
+}

@@ -1,0 +1,782 @@
+/* components/home-hero/HomeHero.module.css */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  height: 100vh; /* Fixed height for consistent display */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: 6rem; /* Increased default top padding */
+  padding-bottom: 4rem; /* Added padding bottom for laptop view */
+  z-index: 1;
+  isolation: isolate;
+  transition: all 0.4s ease;
+}
+
+.backgroundContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  contain: layout style paint;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.backgroundSlide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  will-change: transform, opacity;
+  z-index: -1;
+}
+
+.backgroundSlide.active {
+  opacity: 1;
+}
+
+.backgroundSlide.zooming .backgroundImage {
+  transform: scale(1.08);
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures proper image scaling */
+  transition: transform 10s ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+/* Theme-specific overlays - Now uses global CSS variables */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: background 0.4s ease;
+  /* Uses global theme variables automatically */
+  background: linear-gradient(
+    135deg,
+    rgba(103, 126, 234, 0.3) 0%,
+    rgba(118, 75, 162, 0.4) 50%,
+    rgba(139, 92, 246, 0.3) 100%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.textContent {
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+  width: 100%;
+}
+
+/* Company Name Styling */
+.companyName {
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.companyText {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  /* Exact logo gradient: Blue to Cyan like in your logo */
+  background: linear-gradient(
+    90deg,
+    #3b82f6 0%,
+    #1d4ed8 20%,
+    #1e40af 40%,
+    #0ea5e9 60%,
+    #06b6d4 80%,
+    #22d3ee 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+  /* Static glow effect - no animation */
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
+}
+
+.companySubtext {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem); /* Increased font size */
+  font-weight: 500;
+  /* Static gradient to complement the main title - no animation */
+  background: linear-gradient(90deg, #0ea5e9 0%, #06b6d4 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+/* Title Styling - WITH TYPING ANIMATIONS */
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+  min-height: 2em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.typedText {
+  display: inline;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.cursor {
+  font-weight: 400;
+  animation: blink 1s infinite;
+  color: var(--secondary);
+  font-size: inherit;
+  margin-left: 2px;
+}
+
+/* Subtitle Styling */
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  color: var(--text);
+  opacity: 0.9;
+  margin-bottom: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+/* Button Group */
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+  margin-bottom: 2rem; /* Added margin bottom for laptop view */
+}
+
+.primaryButton,
+.secondaryButton {
+  position: relative;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border: none;
+  backdrop-filter: blur(10px);
+}
+
+.primaryButton {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary),
+    var(--accent)
+  );
+  color: white;
+  box-shadow: 0 8px 25px rgba(103, 126, 234, 0.3);
+}
+
+.primaryButton:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(103, 126, 234, 0.4);
+}
+
+.secondaryButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border: 2px solid var(--primary);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.secondaryButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(103, 126, 234, 0.3);
+}
+
+.buttonText {
+  position: relative;
+  z-index: 2;
+}
+
+.buttonGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50px;
+  z-index: 1;
+}
+
+.primaryButton:hover .buttonGlow,
+.secondaryButton:hover .buttonGlow {
+  opacity: 0.2;
+}
+
+/* Indicators */
+.indicators {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.indicator {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.indicator.active {
+  background: var(--secondary);
+  transform: scale(1.3);
+  box-shadow: 0 0 15px var(--secondary);
+}
+
+.indicator:hover {
+  transform: scale(1.1);
+  background: var(--primary);
+}
+
+/* Floating Elements with Theme Colors */
+.floatingElements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.floatingElement {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  backdrop-filter: blur(5px);
+  transition: all 0.4s ease;
+}
+
+.element1 {
+  width: 5rem;
+  height: 5rem;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  top: 20%;
+  left: 8%;
+  animation: float1 8s ease-in-out infinite;
+}
+
+.element2 {
+  width: 4rem;
+  height: 4rem;
+  background: linear-gradient(45deg, var(--secondary), var(--accent));
+  bottom: 30%;
+  right: 12%;
+  animation: float2 10s ease-in-out infinite;
+}
+
+.element3 {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: linear-gradient(45deg, var(--accent), var(--tertiary));
+  top: 60%;
+  right: 25%;
+  animation: float3 12s ease-in-out infinite;
+}
+
+.element4 {
+  width: 6rem;
+  height: 6rem;
+  background: linear-gradient(45deg, var(--tertiary), var(--primary));
+  top: 15%;
+  right: 5%;
+  animation: float4 9s ease-in-out infinite;
+}
+
+.element5 {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: linear-gradient(45deg, var(--secondary), var(--primary));
+  bottom: 15%;
+  left: 20%;
+  animation: float5 7s ease-in-out infinite;
+}
+
+/* Particle Effects */
+.particleContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--secondary);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: particleFloat 12s linear infinite;
+}
+
+/* Individual particle positions */
+.particle1 {
+  left: 5%;
+  animation-delay: 0s;
+  animation-duration: 10s;
+}
+.particle2 {
+  left: 15%;
+  animation-delay: 1s;
+  animation-duration: 12s;
+}
+.particle3 {
+  left: 25%;
+  animation-delay: 2s;
+  animation-duration: 8s;
+}
+.particle4 {
+  left: 35%;
+  animation-delay: 3s;
+  animation-duration: 14s;
+}
+.particle5 {
+  left: 45%;
+  animation-delay: 4s;
+  animation-duration: 9s;
+}
+.particle6 {
+  left: 55%;
+  animation-delay: 5s;
+  animation-duration: 11s;
+}
+.particle7 {
+  left: 65%;
+  animation-delay: 6s;
+  animation-duration: 13s;
+}
+.particle8 {
+  left: 75%;
+  animation-delay: 7s;
+  animation-duration: 10s;
+}
+.particle9 {
+  left: 85%;
+  animation-delay: 8s;
+  animation-duration: 12s;
+}
+.particle10 {
+  left: 95%;
+  animation-delay: 9s;
+  animation-duration: 8s;
+}
+.particle11 {
+  left: 10%;
+  animation-delay: 2s;
+  animation-duration: 15s;
+}
+.particle12 {
+  left: 30%;
+  animation-delay: 4s;
+  animation-duration: 9s;
+}
+.particle13 {
+  left: 50%;
+  animation-delay: 6s;
+  animation-duration: 11s;
+}
+.particle14 {
+  left: 70%;
+  animation-delay: 8s;
+  animation-duration: 13s;
+}
+.particle15 {
+  left: 90%;
+  animation-delay: 10s;
+  animation-duration: 10s;
+}
+.particle16 {
+  left: 20%;
+  animation-delay: 1.5s;
+  animation-duration: 14s;
+}
+.particle17 {
+  left: 40%;
+  animation-delay: 3.5s;
+  animation-duration: 8s;
+}
+.particle18 {
+  left: 60%;
+  animation-delay: 5.5s;
+  animation-duration: 12s;
+}
+.particle19 {
+  left: 80%;
+  animation-delay: 7.5s;
+  animation-duration: 9s;
+}
+.particle20 {
+  left: 12%;
+  animation-delay: 9.5s;
+  animation-duration: 11s;
+}
+
+/* ANIMATIONS */
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoGradientShift {
+  0% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
+  }
+  25% {
+    background-position: 50% 50%;
+    filter: drop-shadow(0 0 15px rgba(30, 58, 138, 0.4));
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.4));
+  }
+  75% {
+    background-position: 50% 50%;
+    filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.3));
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
+  }
+}
+
+@keyframes textGlow {
+  from {
+    filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.8))
+      drop-shadow(0 0 30px rgba(6, 182, 212, 0.6));
+  }
+}
+
+@keyframes subtextGlow {
+  from {
+    filter: drop-shadow(0 0 3px rgba(6, 182, 212, 0.4));
+  }
+  to {
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6))
+      drop-shadow(0 0 12px rgba(99, 102, 241, 0.4));
+  }
+}
+
+@keyframes float1 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-30px) rotate(270deg);
+  }
+}
+
+@keyframes float2 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(360deg);
+  }
+  33% {
+    transform: translateY(-25px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(-5px) rotate(240deg);
+  }
+}
+
+@keyframes float3 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(180deg);
+  }
+}
+
+@keyframes float4 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-15px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translateY(-30px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translateY(-10px) rotate(270deg) scale(1.05);
+  }
+}
+
+@keyframes float5 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  40% {
+    transform: translateY(-20px) rotate(144deg);
+  }
+  80% {
+    transform: translateY(-8px) rotate(288deg);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Large Desktop specific styles */
+@media (min-width: 1441px) {
+  .hero {
+    padding-top: 6rem; /* Standard padding for large screens */
+  }
+
+  .content {
+    padding: 0 3rem;
+  }
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Laptop/Desktop specific styles */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .hero {
+    height: 100vh; /* Ensure full viewport height */
+    min-height: 100vh;
+    padding-top: 8rem; /* Increased top padding to prevent title cutoff */
+    padding-bottom: 6rem; /* Extra padding for laptop view */
+  }
+
+  .backgroundContainer {
+    height: 100vh; /* Full viewport height for background */
+  }
+
+  .backgroundSlide {
+    height: 100vh; /* Ensure slides cover full height */
+  }
+
+  .backgroundImage {
+    height: 100vh; /* Ensure images cover full height */
+    min-height: 100vh;
+  }
+
+  .buttonGroup {
+    margin-bottom: 4rem; /* More margin for laptop view */
+  }
+
+  .content {
+    padding: 0 2rem;
+    margin-top: 2rem; /* Additional top margin for better spacing */
+  }
+
+  .companyName {
+    margin-bottom: 2.5rem; /* Extra margin below company name */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+
+  .content {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    min-height: 1.8em;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .floatingElement {
+    display: none;
+  }
+
+  .companyText {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .companySubtext {
+    font-size: clamp(1.1rem, 3vw, 1.4rem); /* Increased mobile font size */
+    font-weight: 600;
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .particleContainer {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  .content {
+    padding: 0 0.5rem;
+  }
+
+  .title {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    min-height: 2.2em;
+  }
+
+  .buttonGroup {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .indicators {
+    bottom: 1rem;
+  }
+
+  .indicator {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+
+  .companyText {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    letter-spacing: 2px;
+  }
+
+  .companySubtext {
+    font-size: clamp(1rem, 3vw, 1.2rem); /* Increased mobile size */
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,766 @@
+/* components/LoadingPage/LoadingPage.module.css */
+
+.loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Animated Background Waves */
+.animatedBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.wave1,
+.wave2,
+.wave3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.1) 0%,
+    transparent 70%
+  );
+  animation: waveRotate 20s linear infinite;
+}
+
+.wave2 {
+  animation-delay: -7s;
+  animation-duration: 25s;
+  background: radial-gradient(
+    circle,
+    rgba(103, 126, 234, 0.1) 0%,
+    transparent 70%
+  );
+}
+
+.wave3 {
+  animation-delay: -14s;
+  animation-duration: 30s;
+  background: radial-gradient(
+    circle,
+    rgba(118, 75, 162, 0.1) 0%,
+    transparent 70%
+  );
+}
+
+/* Main Container */
+.container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 90%;
+}
+
+/* Logo Section */
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  animation: logoEntrance 2s ease-out;
+}
+
+.logoIcon {
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  background: linear-gradient(45deg, #667eea, #764ba2, #8b5cf6);
+  background-size: 200% 200%;
+  animation: logoRotate 4s linear infinite,
+    gradientShift 3s ease-in-out infinite;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(103, 126, 234, 0.4),
+    0 0 80px rgba(139, 92, 246, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.logoIcon::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #667eea, #764ba2, #8b5cf6, #06b6d4);
+  background-size: 400% 400%;
+  border-radius: 1.5rem;
+  z-index: -1;
+  animation: gradientShift 2s linear infinite;
+}
+
+.infinity {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  animation: infinityFloat 3s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.logoGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.3) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.logoText {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #ffffff, #e0e7ff, #ffffff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 3s ease-in-out infinite;
+  margin: 0;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  letter-spacing: 2px;
+}
+
+/* Spacer for proper gap */
+.spacer {
+  height: 4rem;
+}
+
+/* Loading Dots Animation */
+.loadingDots {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  animation: dotsContainer 2s ease-in-out infinite;
+}
+
+.dot {
+  width: 1.2rem;
+  height: 1.2rem;
+  background: linear-gradient(45deg, #ffffff, #8b5cf6);
+  border-radius: 50%;
+  animation: dotBounce 1.5s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.dot:nth-child(4) {
+  animation-delay: 0.6s;
+}
+.dot:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+/* Loading Text */
+.loadingTextContainer {
+  margin-bottom: 3rem;
+}
+
+.loadingText {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.loadingText span {
+  display: inline-block;
+  animation: textWave 2s ease-in-out infinite;
+  opacity: 0;
+  animation-fill-mode: both;
+}
+
+.space {
+  width: 0.5rem;
+}
+
+/* Generate delays for each character */
+.loadingText span:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.loadingText span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loadingText span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.loadingText span:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.loadingText span:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.loadingText span:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.loadingText span:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.loadingText span:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.loadingText span:nth-child(9) {
+  animation-delay: 0.9s;
+}
+.loadingText span:nth-child(10) {
+  animation-delay: 1s;
+}
+.loadingText span:nth-child(11) {
+  animation-delay: 1.1s;
+}
+.loadingText span:nth-child(12) {
+  animation-delay: 1.2s;
+}
+.loadingText span:nth-child(13) {
+  animation-delay: 1.3s;
+}
+.loadingText span:nth-child(14) {
+  animation-delay: 1.4s;
+}
+.loadingText span:nth-child(15) {
+  animation-delay: 1.5s;
+}
+.loadingText span:nth-child(16) {
+  animation-delay: 1.6s;
+}
+.loadingText span:nth-child(17) {
+  animation-delay: 1.7s;
+}
+.loadingText span:nth-child(18) {
+  animation-delay: 1.8s;
+}
+.loadingText span:nth-child(19) {
+  animation-delay: 1.9s;
+}
+.loadingText span:nth-child(20) {
+  animation-delay: 2s;
+}
+.loadingText span:nth-child(21) {
+  animation-delay: 2.1s;
+}
+
+/* Progress Bar */
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progressBar {
+  position: relative;
+  width: 300px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2, #8b5cf6, #06b6d4);
+  background-size: 200% 100%;
+  border-radius: 3px;
+  animation: progressSlide 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+}
+
+.progressGlow {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.4),
+    transparent
+  );
+  animation: progressGlow 2s ease-in-out infinite;
+  border-radius: 3px;
+}
+
+.progressText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  animation: textPulse 2s ease-in-out infinite;
+}
+
+/* Floating Particles */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: particleFloat 8s linear infinite;
+}
+
+/* Individual particle positions and delays */
+.particle1 {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 8s;
+}
+.particle2 {
+  left: 20%;
+  animation-delay: 1s;
+  animation-duration: 10s;
+}
+.particle3 {
+  left: 30%;
+  animation-delay: 2s;
+  animation-duration: 7s;
+}
+.particle4 {
+  left: 40%;
+  animation-delay: 3s;
+  animation-duration: 9s;
+}
+.particle5 {
+  left: 50%;
+  animation-delay: 4s;
+  animation-duration: 11s;
+}
+.particle6 {
+  left: 60%;
+  animation-delay: 5s;
+  animation-duration: 8s;
+}
+.particle7 {
+  left: 70%;
+  animation-delay: 6s;
+  animation-duration: 10s;
+}
+.particle8 {
+  left: 80%;
+  animation-delay: 7s;
+  animation-duration: 9s;
+}
+.particle9 {
+  left: 90%;
+  animation-delay: 8s;
+  animation-duration: 7s;
+}
+.particle10 {
+  left: 15%;
+  animation-delay: 1.5s;
+  animation-duration: 12s;
+}
+.particle11 {
+  left: 25%;
+  animation-delay: 2.5s;
+  animation-duration: 8s;
+}
+.particle12 {
+  left: 35%;
+  animation-delay: 3.5s;
+  animation-duration: 10s;
+}
+.particle13 {
+  left: 45%;
+  animation-delay: 4.5s;
+  animation-duration: 9s;
+}
+.particle14 {
+  left: 55%;
+  animation-delay: 5.5s;
+  animation-duration: 11s;
+}
+.particle15 {
+  left: 65%;
+  animation-delay: 6.5s;
+  animation-duration: 8s;
+}
+
+/* Geometric Shapes */
+.geometricShapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.shape1,
+.shape2,
+.shape3,
+.shape4 {
+  position: absolute;
+  opacity: 0.1;
+}
+
+.shape1 {
+  top: 15%;
+  left: 10%;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(45deg, #667eea, #8b5cf6);
+  border-radius: 20px;
+  animation: shapeFloat1 15s ease-in-out infinite;
+}
+
+.shape2 {
+  top: 20%;
+  right: 15%;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #764ba2, #06b6d4);
+  border-radius: 50%;
+  animation: shapeFloat2 12s ease-in-out infinite;
+}
+
+.shape3 {
+  bottom: 20%;
+  left: 20%;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 70px solid rgba(139, 92, 246, 0.3);
+  animation: shapeFloat3 18s ease-in-out infinite;
+}
+
+.shape4 {
+  bottom: 15%;
+  right: 10%;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(45deg, #8b5cf6, #667eea);
+  transform: rotate(45deg);
+  animation: shapeFloat4 20s ease-in-out infinite;
+}
+
+/* ANIMATIONS */
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes waveRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes logoRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes infinityFloat {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes textShimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes dotsContainer {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes dotBounce {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.8);
+  }
+}
+
+@keyframes textWave {
+  0%,
+  60%,
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes progressSlide {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes progressGlow {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
+@keyframes textPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shapeFloat1 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(180deg);
+  }
+}
+
+@keyframes shapeFloat2 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-40px) rotate(-180deg);
+  }
+}
+
+@keyframes shapeFloat3 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(120deg);
+  }
+}
+
+@keyframes shapeFloat4 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(45deg);
+  }
+  50% {
+    transform: translateY(-35px) rotate(225deg);
+  }
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 768px) {
+  .logoIcon {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .infinity {
+    font-size: 2rem;
+  }
+
+  .logoText {
+    font-size: 2.5rem;
+  }
+
+  .spacer {
+    height: 3rem;
+  }
+
+  .loadingText {
+    font-size: 1.25rem;
+  }
+
+  .progressBar {
+    width: 250px;
+  }
+
+  .dot {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoIcon {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .infinity {
+    font-size: 1.5rem;
+  }
+
+  .logoText {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .spacer {
+    height: 2rem;
+  }
+
+  .loadingText {
+    font-size: 1rem;
+  }
+
+  .progressBar {
+    width: 200px;
+  }
+
+  .dot {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .loadingDots {
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+}

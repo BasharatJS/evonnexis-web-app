@@ -1,0 +1,618 @@
+/* components/Header/Header.module.css */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 1rem 1.5rem;
+  background: var(--nav-bg) !important;
+  backdrop-filter: blur(25px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.8s ease-out;
+  isolation: isolate;
+  transition: all 0.4s ease;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--nav-bg);
+  z-index: -1;
+  backdrop-filter: blur(25px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+/* Logo Styling */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInLeft 0.8s ease-out;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logoContainer {
+  position: relative;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 2px 8px rgba(103, 126, 234, 0.2));
+  transition: all 0.3s ease;
+}
+
+.logoSvg {
+  height: auto !important;
+  width: auto !important;
+  max-height: 60px;
+  transition: all 0.3s ease;
+}
+
+.logo:hover .logoContainer {
+  filter: drop-shadow(0 4px 12px rgba(103, 126, 234, 0.3));
+}
+
+.logo:hover .logoSvg {
+  filter: brightness(1.05);
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.navLink {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary),
+    var(--accent)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 1rem;
+  z-index: -1;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.navLink:hover::before {
+  opacity: 0.08;
+}
+
+.navLink:hover::after,
+.navLink.active::after {
+  width: 70%;
+}
+
+.navLink:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.navLink.active {
+  color: var(--primary);
+  font-weight: 600;
+  background: var(--hover);
+}
+
+.navLink.active::before {
+  opacity: 0.1;
+}
+
+/* Theme Toggle */
+.themeToggleContainer {
+  animation: fadeInRight 0.8s ease-out 0.4s both;
+}
+
+.themeToggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  border-radius: 1rem;
+}
+
+.themeToggle:hover {
+  transform: scale(1.05);
+  background: var(--hover);
+}
+
+.toggleTrack {
+  position: relative;
+  width: 64px;
+  height: 32px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.toggleTrack::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  opacity: 0.05;
+  transition: opacity 0.3s ease;
+}
+
+.themeToggle:hover .toggleTrack::before {
+  opacity: 0.1;
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary),
+    var(--accent)
+  );
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(103, 126, 234, 0.3);
+}
+
+.thumbLight {
+  left: 2px;
+  transform: rotate(0deg);
+  box-shadow: 0 2px 8px rgba(103, 126, 234, 0.3);
+}
+
+.thumbDark {
+  left: 36px;
+  transform: rotate(180deg);
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+.iconContainer {
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.sunIcon,
+.moonIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: scale(0.8) rotate(45deg);
+}
+
+.iconActive {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.themeLabels {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.themeLabel {
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.labelActive {
+  color: var(--primary);
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* Mobile Menu Button */
+.mobileMenuButton {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+.mobileMenuButton:hover {
+  background: var(--hover);
+}
+
+.mobileMenuButton span {
+  width: 24px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.line1Open {
+  transform: translateY(7px) rotate(45deg);
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+
+.line2Open {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.line3Open {
+  transform: translateY(-7px) rotate(-45deg);
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+
+/* Mobile Menu */
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(25px);
+  border-top: 1px solid var(--border);
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9998;
+  box-shadow: var(--shadow);
+}
+
+.mobileMenuOpen {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileMenuContent {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobileNavLink {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileNavLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 1rem;
+  z-index: -1;
+}
+
+.mobileNavLink:hover::before,
+.mobileNavLink.active::before {
+  opacity: 0.1;
+}
+
+.mobileNavLink:hover,
+.mobileNavLink.active {
+  color: var(--primary);
+  border-color: var(--border);
+  transform: translateX(8px);
+  font-weight: 600;
+}
+
+.mobileThemeToggle {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileThemeLabel {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.mobileToggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.75rem;
+  color: var(--text);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 0.75rem;
+}
+
+.mobileToggleButton:hover {
+  background: var(--hover);
+}
+
+.mobileToggleTrack {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  background: var(--card-bg);
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.mobileToggleThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 2px 6px rgba(103, 126, 234, 0.3);
+}
+
+.mobileThumbDark {
+  left: 26px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.4);
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Glow effects for enhanced visual appeal */
+.logo:hover .logoContainer {
+  filter: drop-shadow(0 4px 15px rgba(103, 126, 234, 0.4));
+}
+
+.navLink:hover {
+  box-shadow: 0 4px 15px rgba(103, 126, 234, 0.1);
+}
+
+.themeToggle:hover .toggleTrack {
+  box-shadow: 0 4px 15px rgba(103, 126, 234, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .mobileMenuButton {
+    display: flex;
+  }
+
+  .themeLabels {
+    display: none;
+  }
+
+  .toggleTrack {
+    width: 52px;
+    height: 28px;
+  }
+
+  .toggleThumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  .thumbLight {
+    left: 2px;
+  }
+
+  .thumbDark {
+    left: 28px;
+  }
+
+  .logoImageContainer {
+    height: 50px;
+  }
+
+  .logoImage {
+    max-height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.75rem 1rem;
+  }
+
+  .logoImageContainer {
+    height: 45px;
+  }
+
+  .logoImage {
+    max-height: 45px;
+  }
+
+  .toggleTrack {
+    width: 48px;
+    height: 26px;
+  }
+
+  .toggleThumb {
+    width: 18px;
+    height: 18px;
+  }
+
+  .thumbDark {
+    left: 26px;
+  }
+
+  .iconContainer {
+    width: 12px;
+    height: 12px;
+  }
+
+  .sunIcon,
+  .moonIcon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .mobileMenuContent {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Enhanced theme-specific styling */
+.theme-dark .toggleTrack {
+  background: rgba(30, 27, 75, 0.6);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.theme-light .toggleTrack {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(103, 126, 234, 0.2);
+}
+
+/* Loading state animations */
+@keyframes logoGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 2px 8px rgba(103, 126, 234, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 2px 12px rgba(103, 126, 234, 0.4));
+  }
+}
+
+.logo:hover .logoContainer {
+  animation: logoGlow 2s ease-in-out infinite;
+}

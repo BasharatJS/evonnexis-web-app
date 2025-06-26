@@ -1,0 +1,493 @@
+/* components/ServiceDetails/ServiceDetails.module.css */
+
+.serviceDetails {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light theme background */
+:global(.theme-light) .serviceDetails {
+  background: linear-gradient(
+    135deg,
+    #f8faff 0%,
+    #f0f4ff 25%,
+    #e8f2ff 50%,
+    #f5f3ff 75%,
+    #faf8ff 100%
+  );
+}
+
+/* Dark theme background */
+:global(.theme-dark) .serviceDetails {
+  background: linear-gradient(
+    135deg,
+    #0f0a1a 0%,
+    #1a0f2e 25%,
+    #2d1b3d 50%,
+    #1e1b4b 75%,
+    #0f0a1a 100%
+  );
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section Header */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+/* Light theme title */
+:global(.theme-light) .sectionTitle {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark theme title */
+:global(.theme-dark) .sectionTitle {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #667eea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sectionSubtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Light theme subtitle */
+:global(.theme-light) .sectionSubtitle {
+  color: #4c1d95;
+}
+
+/* Dark theme subtitle */
+:global(.theme-dark) .sectionSubtitle {
+  color: #c7d2fe;
+}
+
+/* Services Container */
+.servicesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Service Card */
+.serviceCard {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.cardContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 3rem;
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light theme card */
+:global(.theme-light) .cardContent {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(103, 126, 234, 0.15);
+  box-shadow: 0 8px 32px rgba(103, 126, 234, 0.1);
+}
+
+/* Dark theme card */
+:global(.theme-dark) .cardContent {
+  background: rgba(30, 27, 75, 0.8);
+  border-color: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.2);
+}
+
+.cardContent:hover {
+  transform: translateY(-5px);
+}
+
+:global(.theme-light) .cardContent:hover {
+  box-shadow: 0 12px 40px rgba(103, 126, 234, 0.15);
+}
+
+:global(.theme-dark) .cardContent:hover {
+  box-shadow: 0 12px 40px rgba(139, 92, 246, 0.25);
+}
+
+/* Alternating Layout */
+.serviceCardRight .cardContent {
+  grid-template-columns: 1fr 1fr;
+}
+
+.serviceCardLeft .cardContent {
+  grid-template-columns: 1fr 1fr;
+}
+
+.serviceCardRight .contentSection {
+  order: 2;
+}
+
+.serviceCardRight .imageSection {
+  order: 1;
+}
+
+/* Content Section */
+.contentSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.iconContainer {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.textContent {
+  flex: 1;
+}
+
+.serviceTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+/* Light theme service title */
+:global(.theme-light) .serviceTitle {
+  color: #1e1b4b;
+}
+
+/* Dark theme service title */
+:global(.theme-dark) .serviceTitle {
+  color: #f8faff;
+}
+
+.serviceSubtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+/* Light theme service subtitle */
+:global(.theme-light) .serviceSubtitle {
+  color: #667eea;
+}
+
+/* Dark theme service subtitle */
+:global(.theme-dark) .serviceSubtitle {
+  color: #a855f7;
+}
+
+.serviceDescription {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Light theme description */
+:global(.theme-light) .serviceDescription {
+  color: #4c1d95;
+}
+
+/* Dark theme description */
+:global(.theme-dark) .serviceDescription {
+  color: #c7d2fe;
+}
+
+/* Features List */
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Light theme feature item */
+:global(.theme-light) .featureItem {
+  color: #4c1d95;
+}
+
+/* Dark theme feature item */
+:global(.theme-dark) .featureItem {
+  color: #c7d2fe;
+}
+
+/* Tech Stack */
+.techStack {
+  margin-bottom: 1.5rem;
+}
+
+.techStack h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+/* Light theme tech stack title */
+:global(.theme-light) .techStack h4 {
+  color: #1e1b4b;
+}
+
+/* Dark theme tech stack title */
+:global(.theme-dark) .techStack h4 {
+  color: #f8faff;
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.techTag {
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Light theme tech tag */
+:global(.theme-light) .techTag {
+  background: rgba(255, 255, 255, 0.8);
+  color: #4c1d95;
+}
+
+/* Dark theme tech tag */
+:global(.theme-dark) .techTag {
+  background: rgba(30, 27, 75, 0.6);
+  color: #c7d2fe;
+}
+
+/* Learn More Button */
+.learnMoreBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+/* Image Section */
+.imageSection {
+  position: relative;
+}
+
+.imageContainer {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  aspect-ratio: 4/3;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.cardContent:hover .imageContainer img {
+  transform: scale(1.05);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cardContent:hover .imageOverlay {
+  opacity: 1;
+}
+
+.overlayIcons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .serviceDetails {
+    padding: 4rem 0;
+  }
+
+  .cardContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .serviceCardRight .contentSection,
+  .serviceCardLeft .contentSection {
+    order: 1;
+  }
+
+  .serviceCardRight .imageSection,
+  .serviceCardLeft .imageSection {
+    order: 2;
+  }
+
+  .servicesContainer {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .serviceDetails {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .sectionHeader {
+    margin-bottom: 3rem;
+  }
+
+  .cardContent {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .servicesContainer {
+    gap: 2rem;
+  }
+
+  .techTags {
+    gap: 0.375rem;
+  }
+
+  .techTag {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .overlayIcons {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .serviceDetails {
+    padding: 2rem 0;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .cardContent {
+    padding: 1rem;
+  }
+
+  .serviceTitle {
+    font-size: 1.5rem;
+  }
+
+  .serviceSubtitle {
+    font-size: 1rem;
+  }
+
+  .learnMoreBtn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .iconContainer {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Additional animations and effects */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.iconContainer {
+  animation: float 6s ease-in-out infinite;
+}
+
+.overlayIcons > div {
+  animation: pulse 2s ease-in-out infinite;
+}
