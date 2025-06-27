@@ -1,14 +1,15 @@
-/* components/ServiceHero/ServiceHero.module.css */
+/* components/AboutHero/AboutHero.module.css */
 
-.serviceHero {
+.aboutHero {
   position: relative;
-  height: 70vh; /* Reduced height as requested */
+  height: 70vh; /* Same height as service hero */
   min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible; /* Change from hidden to visible */
   isolation: isolate;
+  padding-top: 3rem; /* Increase padding to prevent cutoff */
 }
 
 /* Background Image Container */
@@ -28,7 +29,7 @@
   height: 100%;
 }
 
-/* Overlay - uses global theme variables */
+/* Overlay */
 .overlay {
   position: absolute;
   inset: 0;
@@ -66,7 +67,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* padding-top: 1rem; */
+  /* padding-top: 1rem;  */
 }
 
 .content {
@@ -74,21 +75,22 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* gap: 2rem; */
+  gap: 2rem;
 }
 
-/* Service Icons Row */
-.serviceIcons {
+/* About Icons Row */
+.aboutIcons {
   display: flex;
   gap: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
   justify-content: center;
-  /* position: relative;
-  z-index: 10; */
+  /* margin-top: 2rem;  */
+  position: relative;
+  z-index: 10;
 }
 
-.serviceIcon {
+.aboutIcon {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,11 +103,11 @@
   transition: all 0.3s ease;
   color: white;
   min-width: 80px;
-  box-shadow: 0 4px 20px rgba(103, 126, 234, 0.2);
+  box-shadow: var(--shadow);
 }
 
-/* Light theme service icons */
-:global(.theme-light) .serviceIcon {
+/* Light theme about icons */
+:global(.theme-light) .aboutIcon {
   background: linear-gradient(
     135deg,
     rgba(103, 126, 234, 0.9) 0%,
@@ -114,8 +116,8 @@
   );
 }
 
-/* Dark theme service icons */
-:global(.theme-dark) .serviceIcon {
+/* Dark theme about icons */
+:global(.theme-dark) .aboutIcon {
   background: linear-gradient(
     135deg,
     rgba(139, 92, 246, 0.9) 0%,
@@ -124,28 +126,20 @@
   );
 }
 
-.serviceIcon:hover {
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--secondary) 50%,
-    var(--accent) 100%
-  );
+.aboutIcon:hover {
   border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 30px rgba(103, 126, 234, 0.4);
   transform: translateY(-3px);
 }
 
-/* Enhanced hover effect using theme variables */
-:global(.theme-dark) .serviceIcon:hover {
-  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
-}
-
-:global(.theme-light) .serviceIcon:hover {
+:global(.theme-light) .aboutIcon:hover {
   box-shadow: 0 8px 30px rgba(103, 126, 234, 0.4);
 }
 
-.serviceIcon span {
+:global(.theme-dark) .aboutIcon:hover {
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+}
+
+.aboutIcon span {
   font-size: 0.8rem;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
@@ -200,28 +194,55 @@
 .subtitle {
   font-family: 'Inter', sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   line-height: 1.4;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   color: rgba(255, 255, 255, 0.95);
 }
 
-.description {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Text color adjustments for different themes */
 :global(.theme-dark) .subtitle {
   color: rgba(248, 250, 255, 0.95);
 }
 
-:global(.theme-dark) .description {
-  color: rgba(199, 210, 254, 0.9);
+/* Stats Section */
+.statsSection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.statItem {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.statItem:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.statNumber {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
 }
 
 /* CTA Buttons */
@@ -250,12 +271,12 @@
 
 .primaryButton {
   color: white;
-  box-shadow: 0 8px 25px rgba(103, 126, 234, 0.4);
 }
 
 /* Light theme primary button */
 :global(.theme-light) .primaryButton {
   background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 8px 25px rgba(103, 126, 234, 0.4);
 }
 
 /* Dark theme primary button */
@@ -265,8 +286,11 @@
 }
 
 .primaryButton:hover {
-  box-shadow: 0 12px 35px rgba(103, 126, 234, 0.5);
   transform: translateY(-3px);
+}
+
+:global(.theme-light) .primaryButton:hover {
+  box-shadow: 0 12px 35px rgba(103, 126, 234, 0.5);
 }
 
 :global(.theme-dark) .primaryButton:hover {
@@ -287,44 +311,31 @@
   transform: translateY(-3px);
 }
 
-:global(.theme-dark) .secondaryButton {
-  background: rgba(248, 250, 255, 0.1);
-  color: rgba(248, 250, 255, 0.95);
-  border: 2px solid rgba(248, 250, 255, 0.3);
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
-}
-
-:global(.theme-dark) .secondaryButton:hover {
-  background: rgba(248, 250, 255, 0.2);
-  border-color: rgba(248, 250, 255, 0.5);
-  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.3);
-}
-
-/* Current Service Info */
-.currentService {
+/* Current Slide Info - MOVED TO RIGHT SIDE */
+.currentSlideInfo {
   position: absolute;
-  bottom: 6rem;
-  right: 2rem;
+  bottom: 2.5rem;
+  right: 2rem; /* Changed from left: 2rem to right: 2rem */
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
   max-width: 250px;
-  box-shadow: 0 12px 35px rgba(103, 126, 234, 0.3);
 }
 
-/* Light theme current service */
-:global(.theme-light) .currentService {
+/* Light theme current slide info */
+:global(.theme-light) .currentSlideInfo {
   background: linear-gradient(
     135deg,
     rgba(30, 27, 75, 0.95) 0%,
     rgba(103, 126, 234, 0.9) 50%,
     rgba(139, 92, 246, 0.95) 100%
   );
+  box-shadow: 0 12px 35px rgba(103, 126, 234, 0.3);
 }
 
-/* Dark theme current service */
-:global(.theme-dark) .currentService {
+/* Dark theme current slide info */
+:global(.theme-dark) .currentSlideInfo {
   background: linear-gradient(
     135deg,
     rgba(15, 10, 26, 0.95) 0%,
@@ -334,30 +345,22 @@
   box-shadow: 0 12px 35px rgba(139, 92, 246, 0.4);
 }
 
-.serviceInfo h3 {
+.slideInfo h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   font-weight: 600;
+  color: white;
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  color: white;
 }
 
-.serviceInfo p {
+.slideInfo p {
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
   font-weight: 500;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-:global(.theme-dark) .serviceInfo h3 {
-  color: rgba(248, 250, 255, 0.95);
-}
-
-:global(.theme-dark) .serviceInfo p {
-  color: rgba(199, 210, 254, 0.85);
 }
 
 /* Indicators */
@@ -390,18 +393,8 @@
   transform: scale(1.1);
 }
 
-:global(.theme-dark) .indicator {
-  background: rgba(248, 250, 255, 0.4);
-}
-
-:global(.theme-dark) .indicator.active {
-  background: rgba(248, 250, 255, 0.95);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
-}
-
-:global(.theme-dark) .indicator:hover {
-  background: rgba(248, 250, 255, 0.7);
-}
+/* Vertical Progress Container - REMOVED */
+/* .verticalProgressContainer styles removed as requested */
 
 /* Floating Elements */
 .floatingElements {
@@ -415,6 +408,9 @@
 .floatingElement2 {
   position: absolute;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0.1;
 }
 
@@ -422,30 +418,32 @@
 :global(.theme-light) .floatingElement1,
 :global(.theme-light) .floatingElement2 {
   background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
 }
 
 /* Dark theme floating elements */
 :global(.theme-dark) .floatingElement1,
 :global(.theme-dark) .floatingElement2 {
   background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: white;
 }
 
 .floatingElement1 {
-  width: 120px;
-  height: 120px;
-  top: 15%;
-  left: 8%;
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  left: 10%;
 }
 
 .floatingElement2 {
   width: 80px;
   height: 80px;
-  bottom: 20%;
-  right: 15%;
+  bottom: 25%;
+  left: 15%;
 }
 
-/* Progress Bar */
-.progressBar {
+/* Bottom Progress Bar */
+.bottomProgressBar {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -454,33 +452,40 @@
   z-index: 10;
 }
 
-/* Light theme progress bar */
-:global(.theme-light) .progressBar {
+/* Light theme bottom progress bar */
+:global(.theme-light) .bottomProgressBar {
   background: linear-gradient(90deg, #667eea, #764ba2);
 }
 
-/* Dark theme progress bar */
-:global(.theme-dark) .progressBar {
+/* Dark theme bottom progress bar */
+:global(.theme-dark) .bottomProgressBar {
   background: linear-gradient(90deg, #8b5cf6, #a855f7);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .serviceHero {
+  .aboutHero {
     height: 65vh;
     min-height: 550px;
+    padding-top: 2rem;
   }
 
-  .serviceIcons {
+  .aboutIcons {
     gap: 1.5rem;
+    margin-top: 1.5rem;
   }
 
-  .serviceIcon {
+  .aboutIcon {
     min-width: 70px;
     padding: 0.75rem;
   }
 
-  .currentService {
+  .statsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .currentSlideInfo {
     position: static;
     margin-top: 2rem;
     max-width: 100%;
@@ -489,27 +494,39 @@
 }
 
 @media (max-width: 768px) {
-  .serviceHero {
+  .aboutHero {
     height: 60vh;
     min-height: 500px;
+    padding-top: 1.5rem;
   }
 
   .container {
     padding: 0 1rem;
+    padding-top: 0.5rem;
   }
 
-  .serviceIcons {
+  .aboutIcons {
     gap: 1rem;
+    margin-top: 1rem;
   }
 
-  .serviceIcon {
+  .aboutIcon {
     min-width: 60px;
     padding: 0.75rem;
   }
 
-  .serviceIcon span {
+  .aboutIcon span {
     font-size: 0.75rem;
     font-weight: 600;
+  }
+
+  .statsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .statItem {
+    padding: 1rem 0.75rem;
   }
 
   .ctaButtons {
@@ -524,7 +541,7 @@
     justify-content: center;
   }
 
-  .currentService {
+  .currentSlideInfo {
     position: static;
     margin-top: 1.5rem;
     padding: 1rem;
@@ -539,7 +556,7 @@
 }
 
 @media (max-width: 480px) {
-  .serviceHero {
+  .aboutHero {
     height: 55vh;
     min-height: 450px;
   }
@@ -548,27 +565,44 @@
     padding: 0 0.75rem;
   }
 
-  .serviceIcons {
+  .aboutIcons {
     gap: 0.75rem;
   }
 
-  .serviceIcon {
+  .aboutIcon {
     min-width: 50px;
     padding: 0.6rem;
   }
 
-  .serviceIcon svg {
+  .aboutIcon svg {
     width: 18px;
     height: 18px;
   }
 
-  .serviceIcon span {
+  .aboutIcon span {
     font-size: 0.7rem;
     font-weight: 600;
   }
 
   .content {
     gap: 1.5rem;
+  }
+
+  .statsSection {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .statItem {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .statNumber {
+    font-size: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 0.8rem;
   }
 
   .ctaButtons {

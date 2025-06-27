@@ -1,14 +1,15 @@
-/* components/ServiceHero/ServiceHero.module.css */
+/* components/ContactHero/ContactHero.module.css */
 
-.serviceHero {
+.contactHero {
   position: relative;
-  height: 70vh; /* Reduced height as requested */
+  height: 70vh;
   min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   isolation: isolate;
+  padding-top: 3rem;
 }
 
 /* Background Image Container */
@@ -28,7 +29,7 @@
   height: 100%;
 }
 
-/* Overlay - uses global theme variables */
+/* Overlay */
 .overlay {
   position: absolute;
   inset: 0;
@@ -66,7 +67,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* padding-top: 1rem; */
 }
 
 .content {
@@ -74,21 +74,21 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* gap: 2rem; */
+  gap: 2rem;
 }
 
-/* Service Icons Row */
-.serviceIcons {
+/* Contact Icons Row */
+.contactIcons {
   display: flex;
   gap: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
   justify-content: center;
-  /* position: relative;
-  z-index: 10; */
+  position: relative;
+  z-index: 10;
 }
 
-.serviceIcon {
+.contactIcon {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,51 +101,43 @@
   transition: all 0.3s ease;
   color: white;
   min-width: 80px;
-  box-shadow: 0 4px 20px rgba(103, 126, 234, 0.2);
+  box-shadow: var(--shadow);
 }
 
-/* Light theme service icons */
-:global(.theme-light) .serviceIcon {
+/* Light theme contact icons */
+:global(.theme-light) .contactIcon {
   background: linear-gradient(
     135deg,
-    rgba(103, 126, 234, 0.9) 0%,
-    rgba(118, 75, 162, 0.85) 50%,
-    rgba(139, 92, 246, 0.9) 100%
+    rgba(16, 185, 129, 0.9) 0%,
+    rgba(5, 150, 105, 0.85) 50%,
+    rgba(4, 120, 87, 0.9) 100%
   );
 }
 
-/* Dark theme service icons */
-:global(.theme-dark) .serviceIcon {
+/* Dark theme contact icons */
+:global(.theme-dark) .contactIcon {
   background: linear-gradient(
     135deg,
-    rgba(139, 92, 246, 0.9) 0%,
-    rgba(168, 85, 247, 0.85) 50%,
-    rgba(103, 126, 234, 0.9) 100%
+    rgba(34, 197, 94, 0.9) 0%,
+    rgba(22, 163, 74, 0.85) 50%,
+    rgba(21, 128, 61, 0.9) 100%
   );
 }
 
-.serviceIcon:hover {
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--secondary) 50%,
-    var(--accent) 100%
-  );
+.contactIcon:hover {
   border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 30px rgba(103, 126, 234, 0.4);
   transform: translateY(-3px);
 }
 
-/* Enhanced hover effect using theme variables */
-:global(.theme-dark) .serviceIcon:hover {
-  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+:global(.theme-light) .contactIcon:hover {
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
 }
 
-:global(.theme-light) .serviceIcon:hover {
-  box-shadow: 0 8px 30px rgba(103, 126, 234, 0.4);
+:global(.theme-dark) .contactIcon:hover {
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.5);
 }
 
-.serviceIcon span {
+.contactIcon span {
   font-size: 0.8rem;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
@@ -171,11 +163,11 @@
 :global(.theme-light) .title {
   background: linear-gradient(
     135deg,
-    #667eea 0%,
-    #764ba2 25%,
-    #8b5cf6 50%,
-    #3b82f6 75%,
-    #6366f1 100%
+    #10b981 0%,
+    #059669 25%,
+    #047857 50%,
+    #065f46 75%,
+    #064e3b 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -186,11 +178,11 @@
 :global(.theme-dark) .title {
   background: linear-gradient(
     135deg,
-    #8b5cf6 0%,
-    #a855f7 25%,
-    #667eea 50%,
-    #22d3ee 75%,
-    #06b6d4 100%
+    #22c55e 0%,
+    #16a34a 25%,
+    #15803d 50%,
+    #166534 75%,
+    #14532d 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -200,28 +192,71 @@
 .subtitle {
   font-family: 'Inter', sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   line-height: 1.4;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   color: rgba(255, 255, 255, 0.95);
 }
 
-.description {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Text color adjustments for different themes */
 :global(.theme-dark) .subtitle {
   color: rgba(248, 250, 255, 0.95);
 }
 
-:global(.theme-dark) .description {
-  color: rgba(199, 210, 254, 0.9);
+/* Stats Section */
+.statsSection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.statItem {
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Light theme stat items */
+:global(.theme-light) .statItem {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+:global(.theme-light) .statItem:hover {
+  background: rgba(16, 185, 129, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+/* Dark theme stat items */
+:global(.theme-dark) .statItem {
+  background: rgba(34, 197, 94, 0.1);
+}
+
+:global(.theme-dark) .statItem:hover {
+  background: rgba(34, 197, 94, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+}
+
+.statNumber {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
 }
 
 /* CTA Buttons */
@@ -250,27 +285,30 @@
 
 .primaryButton {
   color: white;
-  box-shadow: 0 8px 25px rgba(103, 126, 234, 0.4);
 }
 
 /* Light theme primary button */
 :global(.theme-light) .primaryButton {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
 
 /* Dark theme primary button */
 :global(.theme-dark) .primaryButton {
-  background: linear-gradient(135deg, #8b5cf6, #a855f7);
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.5);
 }
 
 .primaryButton:hover {
-  box-shadow: 0 12px 35px rgba(103, 126, 234, 0.5);
   transform: translateY(-3px);
 }
 
+:global(.theme-light) .primaryButton:hover {
+  box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);
+}
+
 :global(.theme-dark) .primaryButton:hover {
-  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6);
+  box-shadow: 0 12px 35px rgba(34, 197, 94, 0.6);
 }
 
 .secondaryButton {
@@ -287,77 +325,56 @@
   transform: translateY(-3px);
 }
 
-:global(.theme-dark) .secondaryButton {
-  background: rgba(248, 250, 255, 0.1);
-  color: rgba(248, 250, 255, 0.95);
-  border: 2px solid rgba(248, 250, 255, 0.3);
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
-}
-
-:global(.theme-dark) .secondaryButton:hover {
-  background: rgba(248, 250, 255, 0.2);
-  border-color: rgba(248, 250, 255, 0.5);
-  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.3);
-}
-
-/* Current Service Info */
-.currentService {
+/* Current Slide Info */
+.currentSlideInfo {
   position: absolute;
-  bottom: 6rem;
+  bottom: 2.5rem;
   right: 2rem;
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
   max-width: 250px;
-  box-shadow: 0 12px 35px rgba(103, 126, 234, 0.3);
 }
 
-/* Light theme current service */
-:global(.theme-light) .currentService {
+/* Light theme current slide info */
+:global(.theme-light) .currentSlideInfo {
   background: linear-gradient(
     135deg,
-    rgba(30, 27, 75, 0.95) 0%,
-    rgba(103, 126, 234, 0.9) 50%,
-    rgba(139, 92, 246, 0.95) 100%
+    rgba(16, 185, 129, 0.95) 0%,
+    rgba(5, 150, 105, 0.9) 50%,
+    rgba(4, 120, 87, 0.95) 100%
   );
+  box-shadow: 0 12px 35px rgba(16, 185, 129, 0.3);
 }
 
-/* Dark theme current service */
-:global(.theme-dark) .currentService {
+/* Dark theme current slide info */
+:global(.theme-dark) .currentSlideInfo {
   background: linear-gradient(
     135deg,
-    rgba(15, 10, 26, 0.95) 0%,
-    rgba(139, 92, 246, 0.9) 50%,
-    rgba(168, 85, 247, 0.95) 100%
+    rgba(34, 197, 94, 0.95) 0%,
+    rgba(22, 163, 74, 0.9) 50%,
+    rgba(21, 128, 61, 0.95) 100%
   );
-  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 12px 35px rgba(34, 197, 94, 0.4);
 }
 
-.serviceInfo h3 {
+.slideInfo h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   font-weight: 600;
+  color: white;
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  color: white;
 }
 
-.serviceInfo p {
+.slideInfo p {
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
   font-weight: 500;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-:global(.theme-dark) .serviceInfo h3 {
-  color: rgba(248, 250, 255, 0.95);
-}
-
-:global(.theme-dark) .serviceInfo p {
-  color: rgba(199, 210, 254, 0.85);
 }
 
 /* Indicators */
@@ -390,19 +407,6 @@
   transform: scale(1.1);
 }
 
-:global(.theme-dark) .indicator {
-  background: rgba(248, 250, 255, 0.4);
-}
-
-:global(.theme-dark) .indicator.active {
-  background: rgba(248, 250, 255, 0.95);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
-}
-
-:global(.theme-dark) .indicator:hover {
-  background: rgba(248, 250, 255, 0.7);
-}
-
 /* Floating Elements */
 .floatingElements {
   position: absolute;
@@ -415,37 +419,42 @@
 .floatingElement2 {
   position: absolute;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0.1;
 }
 
 /* Light theme floating elements */
 :global(.theme-light) .floatingElement1,
 :global(.theme-light) .floatingElement2 {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
 }
 
 /* Dark theme floating elements */
 :global(.theme-dark) .floatingElement1,
 :global(.theme-dark) .floatingElement2 {
-  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
 }
 
 .floatingElement1 {
-  width: 120px;
-  height: 120px;
-  top: 15%;
-  left: 8%;
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  left: 10%;
 }
 
 .floatingElement2 {
   width: 80px;
   height: 80px;
-  bottom: 20%;
-  right: 15%;
+  bottom: 25%;
+  left: 15%;
 }
 
-/* Progress Bar */
-.progressBar {
+/* Bottom Progress Bar */
+.bottomProgressBar {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -454,33 +463,40 @@
   z-index: 10;
 }
 
-/* Light theme progress bar */
-:global(.theme-light) .progressBar {
-  background: linear-gradient(90deg, #667eea, #764ba2);
+/* Light theme bottom progress bar */
+:global(.theme-light) .bottomProgressBar {
+  background: linear-gradient(90deg, #10b981, #059669);
 }
 
-/* Dark theme progress bar */
-:global(.theme-dark) .progressBar {
-  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+/* Dark theme bottom progress bar */
+:global(.theme-dark) .bottomProgressBar {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .serviceHero {
+  .contactHero {
     height: 65vh;
     min-height: 550px;
+    padding-top: 2rem;
   }
 
-  .serviceIcons {
+  .contactIcons {
     gap: 1.5rem;
+    margin-top: 1.5rem;
   }
 
-  .serviceIcon {
+  .contactIcon {
     min-width: 70px;
     padding: 0.75rem;
   }
 
-  .currentService {
+  .statsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .currentSlideInfo {
     position: static;
     margin-top: 2rem;
     max-width: 100%;
@@ -489,27 +505,39 @@
 }
 
 @media (max-width: 768px) {
-  .serviceHero {
+  .contactHero {
     height: 60vh;
     min-height: 500px;
+    padding-top: 1.5rem;
   }
 
   .container {
     padding: 0 1rem;
+    padding-top: 0.5rem;
   }
 
-  .serviceIcons {
+  .contactIcons {
     gap: 1rem;
+    margin-top: 1rem;
   }
 
-  .serviceIcon {
+  .contactIcon {
     min-width: 60px;
     padding: 0.75rem;
   }
 
-  .serviceIcon span {
+  .contactIcon span {
     font-size: 0.75rem;
     font-weight: 600;
+  }
+
+  .statsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .statItem {
+    padding: 1rem 0.75rem;
   }
 
   .ctaButtons {
@@ -524,7 +552,7 @@
     justify-content: center;
   }
 
-  .currentService {
+  .currentSlideInfo {
     position: static;
     margin-top: 1.5rem;
     padding: 1rem;
@@ -539,7 +567,7 @@
 }
 
 @media (max-width: 480px) {
-  .serviceHero {
+  .contactHero {
     height: 55vh;
     min-height: 450px;
   }
@@ -548,27 +576,44 @@
     padding: 0 0.75rem;
   }
 
-  .serviceIcons {
+  .contactIcons {
     gap: 0.75rem;
   }
 
-  .serviceIcon {
+  .contactIcon {
     min-width: 50px;
     padding: 0.6rem;
   }
 
-  .serviceIcon svg {
+  .contactIcon svg {
     width: 18px;
     height: 18px;
   }
 
-  .serviceIcon span {
+  .contactIcon span {
     font-size: 0.7rem;
     font-weight: 600;
   }
 
   .content {
     gap: 1.5rem;
+  }
+
+  .statsSection {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .statItem {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .statNumber {
+    font-size: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 0.8rem;
   }
 
   .ctaButtons {
@@ -621,6 +666,20 @@
   50% {
     opacity: 0.2;
   }
+}
+
+@keyframes contactGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+  }
+}
+
+.theme-dark .contactIcon:hover {
+  animation: contactGlow 2s ease-in-out infinite;
 }
 
 .floatingElement1 {

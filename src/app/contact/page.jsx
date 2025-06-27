@@ -1,10 +1,18 @@
 // app/contact/page.js
 'use client'
+
+import ContactCTA from '@/components/contact-cta/ContactCTA'
+import ContactDetails from '@/components/contact-detail/ContactDetails'
+import ContactHero from '@/components/contact-hero/ContactHero'
+import FAQ from '@/components/faq/FAQ'
+
 export default function ContactPage() {
   return (
-    <div style={{ padding: '8rem 2rem', textAlign: 'center' }}>
-      <h1>Contact Page</h1>
-      <p>Coming Soon...</p>
+    <div>
+      <ContactHero />
+      <ContactDetails />
+      <FAQ />
+      <ContactCTA />
     </div>
   )
 }

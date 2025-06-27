@@ -1,6 +1,5 @@
 'use client'
-import React, { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
 import {
   Code2,
   Smartphone,
@@ -11,18 +10,15 @@ import {
   Users,
   ArrowRight,
   CheckCircle,
-  Zap,
-  Shield,
-  Layers,
 } from 'lucide-react'
 import styles from './ServiceDetails.module.css'
 
 const ServiceDetails = () => {
-  const [activeService, setActiveService] = useState(0)
+  const [visibleItems, setVisibleItems] = useState([])
 
-  const services = [
+  const servicesData = [
     {
-      id: 1,
+      id: 'web-dev',
       icon: Code2,
       title: 'Web Development',
       subtitle: 'Modern, scalable web solutions',
@@ -47,7 +43,7 @@ const ServiceDetails = () => {
       color: '#667eea',
     },
     {
-      id: 2,
+      id: 'mobile-dev',
       icon: Smartphone,
       title: 'Mobile Applications',
       subtitle: 'Native & cross-platform mobile apps',
@@ -72,7 +68,7 @@ const ServiceDetails = () => {
       color: '#764ba2',
     },
     {
-      id: 3,
+      id: 'ui-ux',
       icon: Palette,
       title: 'UI/UX Design',
       subtitle: 'User-centered design experiences',
@@ -97,7 +93,7 @@ const ServiceDetails = () => {
       color: '#8b5cf6',
     },
     {
-      id: 4,
+      id: 'cloud',
       icon: Cloud,
       title: 'Cloud Solutions',
       subtitle: 'Scalable infrastructure & deployment',
@@ -122,7 +118,7 @@ const ServiceDetails = () => {
       color: '#06b6d4',
     },
     {
-      id: 5,
+      id: 'marketing',
       icon: Megaphone,
       title: 'Digital Marketing',
       subtitle: 'Comprehensive online growth strategies',
@@ -147,7 +143,7 @@ const ServiceDetails = () => {
       color: '#f59e0b',
     },
     {
-      id: 6,
+      id: 'support',
       icon: Settings,
       title: 'Maintenance & Support',
       subtitle: 'Ongoing technical excellence',
@@ -170,7 +166,7 @@ const ServiceDetails = () => {
       color: '#10b981',
     },
     {
-      id: 7,
+      id: 'consulting',
       icon: Users,
       title: 'IT Consulting',
       subtitle: 'Strategic technology guidance',
@@ -194,237 +190,118 @@ const ServiceDetails = () => {
     },
   ]
 
-  const ServiceCard = ({ service, index, isInView }) => {
-    const isEven = index % 2 === 0
+  // Completely different approach - timeout based
+  useEffect(() => {
+    const timeouts = []
+
+    servicesData.forEach((_, index) => {
+      const timeout = setTimeout(() => {
+        setVisibleItems((prev) => [...prev, index])
+      }, index * 300)
+
+      timeouts.push(timeout)
+    })
+
+    return () => {
+      timeouts.forEach((timeout) => clearTimeout(timeout))
+    }
+  }, [])
+
+  const ServiceItem = ({ service, index }) => {
+    const isLeft = index % 2 === 0
+    const isVisible = visibleItems.includes(index)
 
     return (
-      <motion.div
-        className={`${styles.serviceCard} ${
-          isEven ? styles.serviceCardLeft : styles.serviceCardRight
+      <div
+        className={`${styles.serviceItem} ${
+          isLeft ? styles.leftAlign : styles.rightAlign
         }`}
-        initial={{ opacity: 0, x: isEven ? -100 : 100 }}
-        animate={
-          isInView
-            ? { opacity: 1, x: 0 }
-            : { opacity: 0, x: isEven ? -100 : 100 }
-        }
-        transition={{ duration: 0.8, delay: index * 0.2 }}
       >
-        <div className={styles.cardContent}>
-          <div className={styles.contentSection}>
-            <motion.div
-              className={styles.iconContainer}
+        <div
+          className={`${styles.serviceBox} ${isVisible ? styles.visible : ''}`}
+        >
+          {/* Content Side */}
+          <div className={styles.contentSide}>
+            <div
+              className={styles.iconBox}
               style={{ backgroundColor: service.color }}
-              whileHover={{ scale: 1.1, rotate: 10 }}
-              transition={{ type: 'spring', stiffness: 300 }}
             >
-              <service.icon size={32} color="white" />
-            </motion.div>
+              <service.icon size={28} color="white" />
+            </div>
 
-            <div className={styles.textContent}>
-              <motion.h3
-                className={styles.serviceTitle}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: index * 0.2 + 0.3 }}
-              >
-                {service.title}
-              </motion.h3>
+            <div className={styles.textBox}>
+              <h3 className={styles.serviceHeading}>{service.title}</h3>
+              <p className={styles.serviceTagline}>{service.subtitle}</p>
+              <p className={styles.serviceText}>{service.description}</p>
 
-              <motion.p
-                className={styles.serviceSubtitle}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: index * 0.2 + 0.4 }}
-              >
-                {service.subtitle}
-              </motion.p>
-
-              <motion.p
-                className={styles.serviceDescription}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: index * 0.2 + 0.5 }}
-              >
-                {service.description}
-              </motion.p>
-
-              <motion.div
-                className={styles.featuresList}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: index * 0.2 + 0.6 }}
-              >
+              <ul className={styles.featuresList}>
                 {service.features.map((feature, idx) => (
-                  <motion.div
-                    key={idx}
-                    className={styles.featureItem}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={
-                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
-                    }
-                    transition={{ delay: index * 0.2 + 0.7 + idx * 0.1 }}
-                  >
-                    <CheckCircle size={16} color={service.color} />
+                  <li key={idx} className={styles.featureItem}>
+                    <CheckCircle size={14} color={service.color} />
                     <span>{feature}</span>
-                  </motion.div>
+                  </li>
                 ))}
-              </motion.div>
+              </ul>
 
-              <motion.div
-                className={styles.techStack}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: index * 0.2 + 0.8 }}
-              >
-                <h4>Technologies We Use</h4>
-                <div className={styles.techTags}>
+              <div className={styles.techSection}>
+                <h4>Technologies</h4>
+                <div className={styles.techList}>
                   {service.technologies.map((tech, idx) => (
-                    <motion.span
+                    <span
                       key={idx}
-                      className={styles.techTag}
+                      className={styles.techItem}
                       style={{ borderColor: service.color }}
-                      whileHover={{
-                        scale: 1.05,
-                        backgroundColor: service.color,
-                        color: 'white',
-                      }}
-                      transition={{ duration: 0.2 }}
                     >
                       {tech}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.button
-                className={styles.learnMoreBtn}
+              <button
+                className={styles.actionBtn}
                 style={{ backgroundColor: service.color }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                }
-                transition={{ delay: index * 0.2 + 0.9 }}
               >
-                Learn More
-                <ArrowRight size={18} />
-              </motion.button>
+                Learn More <ArrowRight size={16} />
+              </button>
             </div>
           </div>
 
-          <motion.div
-            className={styles.imageSection}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={
-              isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-            }
-            transition={{ delay: index * 0.2 + 0.4, duration: 0.6 }}
-          >
-            <div className={styles.imageContainer}>
+          {/* Image Side */}
+          <div className={styles.imageSide}>
+            <div className={styles.imageBox}>
               <img src={service.image} alt={service.title} />
+
+              {/* Moving overlay effect - SOLID COLOR */}
               <div
-                className={styles.imageOverlay}
+                className={styles.movingOverlay}
                 style={{
-                  background: `linear-gradient(135deg, ${service.color}20, ${service.color}40)`,
+                  backgroundColor: `${service.color}D0`,
                 }}
-              >
-                <div className={styles.overlayIcons}>
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: 'linear',
-                    }}
-                  >
-                    <Zap size={24} color="white" />
-                  </motion.div>
-                  <motion.div
-                    animate={{ y: [-10, 10, -10] }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  >
-                    <Shield size={20} color="white" />
-                  </motion.div>
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  >
-                    <Layers size={18} color="white" />
-                  </motion.div>
-                </div>
-              </div>
+              ></div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     )
   }
 
   return (
-    <section className={styles.serviceDetails}>
-      <div className={styles.container}>
-        <motion.div
-          className={styles.sectionHeader}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h2
-            className={styles.sectionTitle}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Our Services in Detail
-          </motion.h2>
-          <motion.p
-            className={styles.sectionSubtitle}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
+    <section className={styles.servicesSection}>
+      <div className={styles.wrapper}>
+        {/* Header */}
+        <div className={styles.header}>
+          <h2 className={styles.mainTitle}>Our Services</h2>
+          <p className={styles.mainSubtitle}>
             Comprehensive solutions tailored to your business needs
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <div className={styles.servicesContainer}>
-          {services.map((service, index) => {
-            const ref = useRef(null)
-            const isInView = useInView(ref, { once: true, amount: 0.3 })
-
-            return (
-              <div key={service.id} ref={ref}>
-                <ServiceCard
-                  service={service}
-                  index={index}
-                  isInView={isInView}
-                />
-              </div>
-            )
-          })}
+        {/* Services List */}
+        <div className={styles.servicesList}>
+          {servicesData.map((service, index) => (
+            <ServiceItem key={service.id} service={service} index={index} />
+          ))}
         </div>
       </div>
     </section>
