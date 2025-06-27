@@ -52,14 +52,7 @@ const MeetTeam = () => {
       image:
         'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face',
       bio: 'Md Basharat Taquee is a skilled frontend developer with a passion for creating intuitive user interfaces. With 3+ years of experience in web development, he has a strong foundation in modern JavaScript frameworks.',
-      skills: [
-        'React Native',
-        'Expo',
-        'Next Js',
-        'React Js',
-        'JavaScript',
-        'TypeScript',
-      ],
+      skills: ['React Native', 'Expo', 'Next Js', 'React Js'],
       github: 'https://github.com/sarahwilson',
       linkedin: 'https://linkedin.com/in/sarahwilson',
       gradient: ['#ef4444', '#f97316'],
@@ -71,14 +64,7 @@ const MeetTeam = () => {
       image:
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
       bio: 'Mr leads the technical development of our mobile and web applications. He has a deep understanding of the latest technologies and can help you build the perfect solution for your business.',
-      skills: [
-        'Node Js',
-        'Express Js',
-        'Mongodb',
-        'JavaScript',
-        'TypeScript',
-        'Firebase',
-      ],
+      skills: ['Node Js', 'Express Js', 'Mongodb', 'Firebase'],
       github: 'https://github.com/kaleemmohideen',
       linkedin: 'https://linkedin.com/in/kaleemmohideen',
       gradient: ['#8b5cf6', '#a855f7'],
@@ -99,6 +85,23 @@ const MeetTeam = () => {
       github: 'https://github.com/khaleelrahman',
       linkedin: 'https://linkedin.com/in/khaleelrahman',
       gradient: ['#f59e0b', '#d97706'],
+    },
+    {
+      id: 6,
+      name: 'Taufiqe Shaikh',
+      position: 'Lead Marketing',
+      image:
+        'https://images.unsplash.com/photo-1502767089025-6572583495b4?w=400&h=400&fit=crop&crop=face',
+      bio: 'Taufiqe leads our marketing initiatives with a strategic focus on brand growth, digital outreach, and user engagement. His expertise helps drive business visibility and customer acquisition.',
+      skills: [
+        'Digital Marketing',
+        'SEO/SEM',
+        'Content Strategy',
+        'Brand Management',
+      ],
+      github: '',
+      linkedin: 'https://linkedin.com/in/taufiqeshaikh',
+      gradient: ['#10b981', '#34d399'],
     },
   ]
 
