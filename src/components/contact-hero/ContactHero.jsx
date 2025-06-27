@@ -81,6 +81,10 @@ const ContactHero = () => {
     }
   }
 
+  const handleSlideChange = (index) => {
+    setCurrentSlide(index)
+  }
+
   return (
     <section className={styles.contactHero}>
       {/* Background Image Slider */}
@@ -220,7 +224,21 @@ const ContactHero = () => {
           </motion.div>
         </div>
 
-        {/* Slide Indicators */}
+        {/* Progress Bar - Right Side Vertical */}
+        <div className={styles.progressBar}>
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              className={`${styles.progressDot} ${
+                index === currentSlide ? styles.activeDot : ''
+              } ${index < currentSlide ? styles.completedDot : ''}`}
+              onClick={() => handleSlideChange(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Slide Indicators - For mobile fallback */}
         <motion.div
           className={styles.indicators}
           initial={{ opacity: 0, y: 20 }}
@@ -233,7 +251,7 @@ const ContactHero = () => {
               className={`${styles.indicator} ${
                 index === currentSlide ? styles.active : ''
               }`}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => handleSlideChange(index)}
             />
           ))}
         </motion.div>
@@ -270,19 +288,6 @@ const ContactHero = () => {
           <Headphones size={20} />
         </motion.div>
       </div>
-
-      {/* Animated Progress Bar (Bottom) */}
-      <motion.div
-        className={styles.bottomProgressBar}
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: 'linear',
-          repeatDelay: 0,
-        }}
-      />
     </section>
   )
 }

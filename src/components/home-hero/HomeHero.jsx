@@ -1,8 +1,10 @@
 'use client'
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './HomeHero.module.css'
 
 const HomeHero = () => {
+  const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isTyping, setIsTyping] = useState(true)
   const [typedText, setTypedText] = useState('')
@@ -50,6 +52,15 @@ const HomeHero = () => {
         'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2426&q=80',
     },
   ]
+
+  // Navigation handlers
+  const handleServicesClick = () => {
+    router.push('/services')
+  }
+
+  const handleContactClick = () => {
+    router.push('/contact')
+  }
 
   // Typing animation effect with slower speed
   useEffect(() => {
@@ -132,11 +143,17 @@ const HomeHero = () => {
 
           {/* Buttons - Always Visible */}
           <div className={styles.buttonGroup}>
-            <button className={styles.primaryButton}>
+            <button
+              className={styles.primaryButton}
+              onClick={handleServicesClick}
+            >
               <span className={styles.buttonText}>Our Services</span>
               <div className={styles.buttonGlow}></div>
             </button>
-            <button className={styles.secondaryButton}>
+            <button
+              className={styles.secondaryButton}
+              onClick={handleContactClick}
+            >
               <span className={styles.buttonText}>Contact Us</span>
               <div className={styles.buttonGlow}></div>
             </button>
@@ -144,14 +161,28 @@ const HomeHero = () => {
         </div>
       </div>
 
-      {/* Slide Indicators */}
-      <div className={styles.indicators}>
+      {/* Slide Indicators - Moved to Right Bottom */}
+      {/* <div className={styles.indicators}>
         {heroSlides.map((_, index) => (
           <button
             key={index}
             className={`${styles.indicator} ${
               index === currentSlide ? styles.active : ''
             }`}
+            onClick={() => handleSlideChange(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div> */}
+
+      {/* Progress Bar - Right Side Vertical */}
+      <div className={styles.progressBar}>
+        {heroSlides.map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.progressDot} ${
+              index === currentSlide ? styles.activeDot : ''
+            } ${index < currentSlide ? styles.completedDot : ''}`}
             onClick={() => handleSlideChange(index)}
             aria-label={`Go to slide ${index + 1}`}
           />

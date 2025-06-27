@@ -1,9 +1,17 @@
 'use client'
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import styles from './HomeServices.module.css'
 
 const Services = () => {
+  const router = useRouter()
+
+  // Navigation handler for service navigation
+  const handleServiceNavigation = () => {
+    router.push('/services')
+  }
+
   const servicesData = [
     {
       id: 1,
@@ -167,6 +175,8 @@ const Services = () => {
               key={service.id}
               className={styles.serviceCard}
               variants={cardVariants}
+              onClick={handleServiceNavigation}
+              style={{ cursor: 'pointer' }}
             >
               <div className={styles.cardContainer}>
                 <div className={styles.iconContainer}>
@@ -186,7 +196,10 @@ const Services = () => {
                   className={styles.learnMoreButton}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => (window.location.href = '/services')}
+                  onClick={(e) => {
+                    e.stopPropagation() // Prevent card click
+                    handleServiceNavigation()
+                  }}
                 >
                   Learn More
                   <svg
@@ -244,6 +257,7 @@ const Services = () => {
             className={styles.viewAllButton}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
+            onClick={handleServiceNavigation}
           >
             <span>View All Services</span>
             <div className={styles.buttonGlow}></div>

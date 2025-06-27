@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import {
   Home,
   Briefcase,
@@ -18,7 +19,13 @@ import {
 import styles from './Footer.module.css'
 
 const Footer = () => {
+  const router = useRouter()
   const currentYear = new Date().getFullYear()
+
+  // Navigation handler for internal links
+  const handleInternalNavigation = (href) => {
+    router.push(href)
+  }
 
   const quickLinks = [
     { name: 'Home', href: '/', icon: Home },
@@ -29,10 +36,12 @@ const Footer = () => {
   ]
 
   const services = [
-    { name: 'Web Development', href: '/services/web-development' },
-    { name: 'Mobile Applications', href: '/services/mobile-apps' },
-    { name: 'UI/UX Design', href: '/services/ui-ux-design' },
-    { name: 'IT Consulting', href: '/services/it-consulting' },
+    { name: 'Web Development', href: '/services' },
+    { name: 'Mobile Applications', href: '/services' },
+    { name: 'UI/UX Design', href: '/services' },
+    { name: 'Digital Marketing', href: '/services' },
+    { name: 'IT Consulting', href: '/services' },
+    { name: 'Cloud Solutions', href: '/services' },
   ]
 
   const socialLinks = [
@@ -102,6 +111,8 @@ const Footer = () => {
               className={styles.logo}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
+              onClick={() => handleInternalNavigation('/')}
+              style={{ cursor: 'pointer' }}
             >
               <div className={styles.logoIcon}>
                 <motion.div
@@ -166,19 +177,26 @@ const Footer = () => {
             </motion.h4>
             <div className={styles.linksList}>
               {quickLinks.map((link, index) => (
-                <motion.a
+                <motion.button
                   key={link.name}
-                  href={link.href}
                   className={styles.footerLink}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
                   whileHover={{ x: 10, color: 'var(--primary)' }}
+                  onClick={() => handleInternalNavigation(link.href)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    width: '100%',
+                  }}
                 >
                   <link.icon size={16} />
                   <span>{link.name}</span>
-                </motion.a>
+                </motion.button>
               ))}
             </div>
           </motion.div>
@@ -197,18 +215,25 @@ const Footer = () => {
             </motion.h4>
             <div className={styles.linksList}>
               {services.map((service, index) => (
-                <motion.a
+                <motion.button
                   key={service.name}
-                  href={service.href}
                   className={styles.footerLink}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
                   whileHover={{ x: 10, color: 'var(--primary)' }}
+                  onClick={() => handleInternalNavigation(service.href)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    width: '100%',
+                  }}
                 >
                   <span>{service.name}</span>
-                </motion.a>
+                </motion.button>
               ))}
             </div>
           </motion.div>
@@ -244,7 +269,7 @@ const Footer = () => {
                 whileHover={{ x: 5 }}
               >
                 <Phone size={16} />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 7022340149</span>
               </motion.div>
 
               <motion.div
@@ -256,7 +281,7 @@ const Footer = () => {
                 whileHover={{ x: 5 }}
               >
                 <MapPin size={16} />
-                <span>123 Tech Street, San Francisco, CA 94107</span>
+                <span>Ashirvad Park, Mohammedwadi, Pune, India 410028</span>
               </motion.div>
             </div>
           </motion.div>

@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import {
   ArrowRight,
   Sparkles,
@@ -13,6 +14,17 @@ import {
 import styles from './ServiceCTA.module.css'
 
 const ServiceCTA = () => {
+  const router = useRouter()
+
+  // Navigation handlers
+  const handleContactClick = () => {
+    router.push('/contact')
+  }
+
+  const handlePortfolioClick = () => {
+    router.push('/portfolio')
+  }
+
   const floatingElements = [
     { icon: Sparkles, delay: 0, duration: 3 },
     { icon: Zap, delay: 1, duration: 4 },
@@ -164,7 +176,7 @@ const ServiceCTA = () => {
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
-                onClick={() => (window.location.href = '/contact')}
+                onClick={handleContactClick}
               >
                 <span>Get in Touch</span>
                 <ArrowRight size={20} />
@@ -179,7 +191,7 @@ const ServiceCTA = () => {
                   transition: { duration: 0.2 },
                 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => (window.location.href = '/portfolio')}
+                onClick={handlePortfolioClick}
               >
                 <span>View Portfolio</span>
               </motion.button>

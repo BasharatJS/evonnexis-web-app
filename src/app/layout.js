@@ -18,18 +18,32 @@ const geistMono = Geist_Mono({
 })
 
 export default function RootLayout({ children }) {
-  const [mounted, setMounted] = useState(false)
+  const [showLoading, setShowLoading] = useState(true)
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
 
   useEffect(() => {
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      setMounted(true)
-    }, 2000) // 2 seconds loading
+    // Check if user has already seen the loading screen in this session
+    const hasSeenLoading = sessionStorage.getItem('hasSeenLoading')
 
-    return () => clearTimeout(timer)
+    if (hasSeenLoading) {
+      // User has already seen loading, don't show it again
+      setShowLoading(false)
+      setIsInitialLoad(false)
+    } else {
+      // First time visit - show loading screen
+      const timer = setTimeout(() => {
+        setShowLoading(false)
+        setIsInitialLoad(false)
+        // Mark that user has seen the loading screen
+        sessionStorage.setItem('hasSeenLoading', 'true')
+      }, 2000) // 2 seconds loading
+
+      return () => clearTimeout(timer)
+    }
   }, [])
 
-  if (!mounted) {
+  // Show loading screen only on initial visit
+  if (showLoading && isInitialLoad) {
     return (
       <html lang="en">
         <head>
@@ -50,6 +64,7 @@ export default function RootLayout({ children }) {
     )
   }
 
+  // Normal layout after loading is complete
   return (
     <html lang="en">
       <head>

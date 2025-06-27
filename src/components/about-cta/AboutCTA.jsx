@@ -1,6 +1,7 @@
 'use client'
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import {
   ArrowRight,
   Sparkles,
@@ -15,6 +16,7 @@ import {
 import styles from './AboutCTA.module.css'
 
 const AboutCTA = () => {
+  const router = useRouter()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-50px' })
 
@@ -65,6 +67,11 @@ const AboutCTA = () => {
         ease: 'easeInOut',
       },
     }),
+  }
+
+  // Navigation handler for the Get In Touch button
+  const handleContactClick = () => {
+    router.push('/contact')
   }
 
   return (
@@ -236,7 +243,7 @@ const AboutCTA = () => {
                 boxShadow: '0 20px 40px rgba(59, 130, 246, 0.4)',
               }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => (window.location.href = '/contact')}
+              onClick={handleContactClick}
             >
               <span className={styles.buttonText}>Get In Touch</span>
               <motion.div

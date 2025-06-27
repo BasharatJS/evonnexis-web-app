@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import {
   Users,
   Target,
@@ -14,7 +15,17 @@ import {
 import styles from './AboutHero.module.css'
 
 const AboutHero = () => {
+  const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
+
+  // Navigation handlers
+  const handleGetToKnowUsClick = () => {
+    router.push('/contact')
+  }
+
+  const handleOurWorkClick = () => {
+    router.push('/portfolio')
+  }
 
   const heroImages = [
     {
@@ -73,6 +84,10 @@ const AboutHero = () => {
 
     return () => clearInterval(timer)
   }, [heroImages.length])
+
+  const handleSlideChange = (index) => {
+    setCurrentSlide(index)
+  }
 
   return (
     <section className={styles.aboutHero}>
@@ -180,7 +195,7 @@ const AboutHero = () => {
                 className={styles.primaryButton}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => (window.location.href = '/contact')}
+                onClick={handleGetToKnowUsClick}
               >
                 <span>Get to Know Us</span>
                 <Users size={20} />
@@ -190,7 +205,7 @@ const AboutHero = () => {
                 className={styles.secondaryButton}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => (window.location.href = '/portfolio')}
+                onClick={handleOurWorkClick}
               >
                 <span>Our Work</span>
               </motion.button>
@@ -212,7 +227,21 @@ const AboutHero = () => {
           </motion.div>
         </div>
 
-        {/* Slide Indicators */}
+        {/* Progress Bar - Right Side Vertical */}
+        <div className={styles.progressBar}>
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              className={`${styles.progressDot} ${
+                index === currentSlide ? styles.activeDot : ''
+              } ${index < currentSlide ? styles.completedDot : ''}`}
+              onClick={() => handleSlideChange(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Slide Indicators - For mobile fallback */}
         <motion.div
           className={styles.indicators}
           initial={{ opacity: 0, y: 20 }}
@@ -225,7 +254,7 @@ const AboutHero = () => {
               className={`${styles.indicator} ${
                 index === currentSlide ? styles.active : ''
               }`}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => handleSlideChange(index)}
             />
           ))}
         </motion.div>

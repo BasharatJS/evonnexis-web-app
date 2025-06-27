@@ -4,85 +4,102 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import {
   ArrowRight,
-  Code,
-  Smartphone,
-  Palette,
-  Cloud,
-  Zap,
-  Shield,
+  Eye,
+  ExternalLink,
+  Briefcase,
+  Award,
+  TrendingUp,
+  Star,
+  Layers,
 } from 'lucide-react'
-import styles from './ServiceHero.module.css'
+import styles from './PortfolioHero.module.css'
 
-const ServiceHero = () => {
+const PortfolioHero = () => {
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
 
   // Navigation handlers
-  const handleGetStartedClick = () => {
+  const handleViewProjectsClick = () => {
+    // Scroll to projects section or navigate to projects
+    const projectsSection = document.getElementById('projects-section')
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleContactClick = () => {
     router.push('/contact')
   }
 
-  const handlePortfolioClick = () => {
-    router.push('/portfolio')
-  }
-
-  const heroImages = [
+  const portfolioImages = [
     {
       id: 1,
       url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      title: 'Web Development',
-      description: 'Modern web solutions',
+      title: 'Web Applications',
+      description: 'Innovative web solutions',
+      category: 'Web Development',
     },
     {
       id: 2,
       url: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       title: 'Mobile Apps',
-      description: 'Cross-platform mobile development',
+      description: 'Cross-platform excellence',
+      category: 'Mobile Development',
     },
     {
       id: 3,
-      url: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      url: 'https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       title: 'UI/UX Design',
       description: 'Beautiful user experiences',
+      category: 'Design & UX',
     },
     {
       id: 4,
       url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      title: 'Cloud Solutions',
-      description: 'Scalable infrastructure',
+      title: 'E-commerce Solutions',
+      description: 'Complete online stores',
+      category: 'E-commerce',
     },
     {
       id: 5,
-      url: 'https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      title: 'Digital Innovation',
-      description: 'Cutting-edge technology',
+      url: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      title: 'Enterprise Solutions',
+      description: 'Scalable business platforms',
+      category: 'Enterprise',
     },
   ]
 
-  const serviceIcons = [
-    { icon: Code, label: 'Development' },
-    { icon: Smartphone, label: 'Mobile' },
-    { icon: Palette, label: 'Design' },
-    { icon: Cloud, label: 'Cloud' },
-    { icon: Zap, label: 'Performance' },
-    { icon: Shield, label: 'Security' },
+  const portfolioIcons = [
+    { icon: Briefcase, label: 'Projects' },
+    { icon: Award, label: 'Quality' },
+    { icon: TrendingUp, label: 'Growth' },
+    { icon: Star, label: 'Excellence' },
+    { icon: Layers, label: 'Innovation' },
+    { icon: Eye, label: 'Vision' },
+  ]
+
+  const stats = [
+    { number: '150+', label: 'Projects Completed' },
+    { number: '95%', label: 'Client Satisfaction' },
+    { number: '50+', label: 'Happy Clients' },
+    { number: '8+', label: 'Years Experience' },
   ]
 
   // Auto-slide functionality
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % heroImages.length)
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % portfolioImages.length)
     }, 4000) // Change slide every 4 seconds
 
     return () => clearInterval(timer)
-  }, [heroImages.length])
+  }, [portfolioImages.length])
 
   const handleSlideChange = (index) => {
     setCurrentSlide(index)
   }
 
   return (
-    <section className={styles.serviceHero}>
+    <section className={styles.portfolioHero}>
       {/* Background Image Slider */}
       <div className={styles.imageContainer}>
         <AnimatePresence mode="wait">
@@ -90,7 +107,7 @@ const ServiceHero = () => {
             key={currentSlide}
             className={styles.backgroundImage}
             style={{
-              backgroundImage: `url(${heroImages[currentSlide].url})`,
+              backgroundImage: `url(${portfolioImages[currentSlide].url})`,
             }}
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -106,24 +123,24 @@ const ServiceHero = () => {
       {/* Content */}
       <div className={styles.container}>
         <div className={styles.content}>
-          {/* Service Icons Row */}
+          {/* Portfolio Icons Row */}
           <motion.div
-            className={styles.serviceIcons}
+            className={styles.portfolioIcons}
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {serviceIcons.map((service, index) => (
+            {portfolioIcons.map((item, index) => (
               <motion.div
                 key={index}
-                className={styles.serviceIcon}
+                className={styles.portfolioIcon}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
                 whileHover={{ scale: 1.2, rotateY: 180 }}
               >
-                <service.icon size={24} />
-                <span>{service.label}</span>
+                <item.icon size={24} />
+                <span>{item.label}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -141,7 +158,7 @@ const ServiceHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Our Services
+              Our Portfolio
             </motion.h1>
 
             <motion.p
@@ -150,8 +167,8 @@ const ServiceHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
             >
-              We provide end-to-end solutions for businesses looking to
-              establish or enhance their digital presence.
+              Showcasing our finest work and innovative solutions that have
+              transformed businesses across various industries.
             </motion.p>
 
             <motion.p
@@ -160,9 +177,9 @@ const ServiceHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.1 }}
             >
-              From web development to mobile applications, UI/UX design to cloud
-              solutions, we deliver innovative technology that drives business
-              growth.
+              From startups to enterprise solutions, explore our diverse
+              portfolio of successful projects that demonstrate our expertise
+              and commitment to excellence.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -170,47 +187,59 @@ const ServiceHero = () => {
               className={styles.ctaButtons}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.3 }}
+              transition={{ duration: 0.8, delay: 1.7 }}
             >
               <motion.button
                 className={styles.primaryButton}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={handleGetStartedClick}
+                onClick={handleViewProjectsClick}
               >
-                <span>Get Started</span>
-                <ArrowRight size={20} />
+                <span>View Projects</span>
+                <Eye size={20} />
               </motion.button>
 
               <motion.button
                 className={styles.secondaryButton}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={handlePortfolioClick}
+                onClick={handleContactClick}
               >
-                View Portfolio
+                <span>Start Your Project</span>
+                <ArrowRight size={20} />
               </motion.button>
             </motion.div>
           </motion.div>
 
-          {/* Current Service Info */}
+          {/* Current Project Info */}
           <motion.div
-            className={styles.currentService}
+            className={styles.currentProject}
             key={currentSlide}
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className={styles.serviceInfo}>
-              <h3>{heroImages[currentSlide].title}</h3>
-              <p>{heroImages[currentSlide].description}</p>
+            <div className={styles.projectInfo}>
+              <div className={styles.projectCategory}>
+                {portfolioImages[currentSlide].category}
+              </div>
+              <h3>{portfolioImages[currentSlide].title}</h3>
+              <p>{portfolioImages[currentSlide].description}</p>
+              <motion.button
+                className={styles.projectButton}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ExternalLink size={16} />
+                <span>View Project</span>
+              </motion.button>
             </div>
           </motion.div>
         </div>
 
-        {/* Progress Bar - Right Side Vertical */}
+        {/* Progress Bar - Right Bottom Side */}
         <div className={styles.progressBar}>
-          {heroImages.map((_, index) => (
+          {portfolioImages.map((_, index) => (
             <button
               key={index}
               className={`${styles.progressDot} ${
@@ -221,24 +250,6 @@ const ServiceHero = () => {
             />
           ))}
         </div>
-
-        {/* Slide Indicators - Kept for mobile fallback */}
-        <motion.div
-          className={styles.indicators}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-        >
-          {heroImages.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicator} ${
-                index === currentSlide ? styles.active : ''
-              }`}
-              onClick={() => handleSlideChange(index)}
-            />
-          ))}
-        </motion.div>
       </div>
 
       {/* Floating Elements */}
@@ -267,6 +278,19 @@ const ServiceHero = () => {
             ease: 'easeInOut',
           }}
         />
+        <motion.div
+          className={styles.floatingElement3}
+          animate={{
+            y: [0, -15, 0],
+            x: [0, 10, 0],
+            rotate: [0, -180, -360],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
       </div>
 
       {/* Animated Progress Line (Bottom) */}
@@ -285,4 +309,4 @@ const ServiceHero = () => {
   )
 }
 
-export default ServiceHero
+export default PortfolioHero

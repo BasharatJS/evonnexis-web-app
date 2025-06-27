@@ -1,9 +1,17 @@
 'use client'
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import styles from './CtaSection.module.css'
 
 const CtaSection = () => {
+  const router = useRouter()
+
+  // Navigation handler for the Get in Touch button
+  const handleContactClick = () => {
+    router.push('/contact')
+  }
+
   return (
     <section className={styles.ctaSection}>
       <div className={styles.container}>
@@ -46,7 +54,7 @@ const CtaSection = () => {
               className={styles.ctaButton}
               whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => (window.location.href = '/contact')}
+              onClick={handleContactClick}
             >
               <span className={styles.buttonText}>Get in Touch</span>
               <motion.div
