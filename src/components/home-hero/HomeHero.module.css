@@ -57,19 +57,18 @@
 }
 
 /* Theme-specific overlays - Now uses global CSS variables */
-.overlay {
+/* .overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   transition: background 0.4s ease;
-  /* Uses global theme variables automatically */
   background: linear-gradient(
     135deg,
     rgba(103, 126, 234, 0.3) 0%,
     rgba(118, 75, 162, 0.4) 50%,
     rgba(139, 92, 246, 0.3) 100%
   );
-}
+} */
 
 .content {
   position: relative;
@@ -96,7 +95,7 @@
 .companyText {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 700;
+  font-weight: bold;
   /* Light theme gradient by default */
   background: linear-gradient(
     135deg,
@@ -138,7 +137,7 @@
 .companySubtext {
   font-family: 'Inter', sans-serif;
   font-size: clamp(1.2rem, 2.5vw, 1.8rem); /* Increased font size */
-  font-weight: 500;
+  font-weight: bold;
   /* Light theme gradient by default */
   background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%);
   -webkit-background-clip: text;
@@ -193,6 +192,7 @@
   font-family: 'Inter', sans-serif;
   font-size: clamp(1.125rem, 3vw, 1.5rem);
   color: var(--text);
+  font-weight: bold;
   opacity: 0.9;
   margin-bottom: 3rem;
   max-width: 900px;

@@ -47,7 +47,7 @@
 
 .title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.1;
@@ -177,6 +177,22 @@
   background: linear-gradient(135deg, #8b5cf6, #a855f7);
   color: white;
   box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
+}
+
+:global(.theme-dark) .tabButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+:global(.theme-light) .tabButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Projects Container */
+.projectsContainer {
+  position: relative;
+  min-height: 600px;
 }
 
 /* Projects Grid */
@@ -479,6 +495,331 @@
   background: linear-gradient(135deg, #ec4899, #be185d);
 }
 
+/* Simplified Beautiful Loader Styles */
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+}
+
+/* Light theme loader background */
+:global(.theme-light) .loaderContainer {
+  background: radial-gradient(
+    circle at center,
+    rgba(248, 250, 255, 0.95) 0%,
+    rgba(240, 244, 255, 0.9) 50%,
+    rgba(232, 242, 255, 0.8) 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+/* Dark theme loader background */
+:global(.theme-dark) .loaderContainer {
+  background: radial-gradient(
+    circle at center,
+    rgba(15, 10, 26, 0.95) 0%,
+    rgba(26, 15, 46, 0.9) 50%,
+    rgba(45, 27, 61, 0.8) 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.loader {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  height: 350px;
+}
+
+/* Main Spinner with enhanced design */
+.mainSpinner {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 2.5rem;
+}
+
+.spinnerRing {
+  position: absolute;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  animation: spin 2s linear infinite;
+}
+
+.spinnerRing:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  border-top: 4px solid;
+  animation-duration: 1.8s;
+  filter: drop-shadow(0 0 15px rgba(103, 126, 234, 0.5));
+}
+
+.spinnerRing:nth-child(2) {
+  width: 85%;
+  height: 85%;
+  top: 7.5%;
+  left: 7.5%;
+  border-right: 4px solid;
+  animation-duration: 2.2s;
+  animation-direction: reverse;
+  filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.4));
+}
+
+.spinnerRing:nth-child(3) {
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+  border-bottom: 4px solid;
+  animation-duration: 2.6s;
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.4));
+}
+
+.spinnerRing:nth-child(4) {
+  width: 55%;
+  height: 55%;
+  top: 22.5%;
+  left: 22.5%;
+  border-left: 4px solid;
+  animation-duration: 3s;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
+}
+
+/* Light theme spinner rings */
+:global(.theme-light) .spinnerRing:nth-child(1) {
+  border-top-color: #667eea;
+}
+
+:global(.theme-light) .spinnerRing:nth-child(2) {
+  border-right-color: #8b5cf6;
+}
+
+:global(.theme-light) .spinnerRing:nth-child(3) {
+  border-bottom-color: #22d3ee;
+}
+
+:global(.theme-light) .spinnerRing:nth-child(4) {
+  border-left-color: #f59e0b;
+}
+
+/* Dark theme spinner rings */
+:global(.theme-dark) .spinnerRing:nth-child(1) {
+  border-top-color: #8b5cf6;
+  filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
+}
+
+:global(.theme-dark) .spinnerRing:nth-child(2) {
+  border-right-color: #a855f7;
+  filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.5));
+}
+
+:global(.theme-dark) .spinnerRing:nth-child(3) {
+  border-bottom-color: #06b6d4;
+  filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.5));
+}
+
+:global(.theme-dark) .spinnerRing:nth-child(4) {
+  border-left-color: #f59e0b;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5));
+}
+
+/* Central glowing orb */
+.loader::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  z-index: 5;
+  animation: centralPulse 2s ease-in-out infinite;
+}
+
+/* Light theme central orb */
+:global(.theme-light) .loader::before {
+  background: radial-gradient(circle, #667eea, #8b5cf6);
+  box-shadow: 0 0 30px rgba(103, 126, 234, 0.8),
+    0 0 60px rgba(139, 92, 246, 0.4);
+}
+
+/* Dark theme central orb */
+:global(.theme-dark) .loader::before {
+  background: radial-gradient(circle, #8b5cf6, #a855f7);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.9), 0 0 80px rgba(168, 85, 247, 0.5);
+}
+
+/* Loading Text with enhanced styling */
+.loadingText {
+  margin: 1.5rem 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.loadingText span {
+  display: inline-block;
+  background-size: 200% 100%;
+  animation: textShimmer 2s ease-in-out infinite;
+}
+
+/* Light theme loading text */
+:global(.theme-light) .loadingText span {
+  background: linear-gradient(90deg, #667eea 0%, #8b5cf6 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark theme loading text */
+:global(.theme-dark) .loadingText span {
+  background: linear-gradient(90deg, #8b5cf6 0%, #a855f7 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Progress Container with enhanced design */
+.progressContainer {
+  width: 250px;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+/* Light theme progress container */
+:global(.theme-light) .progressContainer {
+  background: rgba(103, 126, 234, 0.15);
+  border: 1px solid rgba(103, 126, 234, 0.2);
+}
+
+/* Dark theme progress container */
+:global(.theme-dark) .progressContainer {
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light theme progress bar */
+:global(.theme-light) .progressBar {
+  background: linear-gradient(90deg, #667eea, #8b5cf6, #22d3ee);
+  background-size: 200% 100%;
+  animation: progressFlow 2s ease-in-out infinite;
+}
+
+/* Dark theme progress bar */
+:global(.theme-dark) .progressBar {
+  background: linear-gradient(90deg, #8b5cf6, #a855f7, #06b6d4);
+  background-size: 200% 100%;
+  animation: progressFlow 2s ease-in-out infinite;
+}
+
+.progressBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  animation: shimmerProgress 1.8s infinite;
+}
+
+/* Enhanced Background Elements */
+.backgroundElements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.pulseCircle,
+.pulseCircle2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.pulseCircle {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pulseCircle2 {
+  width: 350px;
+  height: 350px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Light theme pulse circles */
+:global(.theme-light) .pulseCircle {
+  background: radial-gradient(
+    circle,
+    rgba(103, 126, 234, 0.1) 0%,
+    rgba(139, 92, 246, 0.05) 50%,
+    transparent 100%
+  );
+}
+
+:global(.theme-light) .pulseCircle2 {
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.08) 0%,
+    rgba(34, 211, 238, 0.04) 50%,
+    transparent 100%
+  );
+}
+
+/* Dark theme pulse circles */
+:global(.theme-dark) .pulseCircle {
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.15) 0%,
+    rgba(168, 85, 247, 0.08) 50%,
+    transparent 100%
+  );
+}
+
+:global(.theme-dark) .pulseCircle2 {
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.12) 0%,
+    rgba(6, 182, 212, 0.06) 50%,
+    transparent 100%
+  );
+}
+
 /* CTA Section */
 .ctaSection {
   margin-top: 5rem;
@@ -564,6 +905,81 @@
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
 }
 
+/* Enhanced Animations */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes centralPulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes progressFlow {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes shimmerProgress {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  33% {
+    transform: translateY(-20px) rotate(120deg);
+    opacity: 1;
+  }
+  66% {
+    transform: translateY(10px) rotate(240deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
   .projectsGrid {
@@ -635,6 +1051,38 @@
     padding: 0.875rem 2rem;
     font-size: 1rem;
   }
+
+  /* Loader responsive adjustments */
+  .loader {
+    width: 300px;
+    height: 300px;
+  }
+
+  .mainSpinner {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 2rem;
+  }
+
+  .loadingText {
+    font-size: 1.1rem;
+    margin: 1.25rem 0;
+  }
+
+  .progressContainer {
+    width: 200px;
+    height: 5px;
+  }
+
+  .pulseCircle {
+    width: 400px;
+    height: 400px;
+  }
+
+  .pulseCircle2 {
+    width: 280px;
+    height: 280px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -705,35 +1153,40 @@
     width: 1.25rem;
     height: 1.25rem;
   }
-}
 
-/* Animation Enhancements */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
+  /* Mobile loader adjustments */
+  .loaderContainer {
+    min-height: 400px;
   }
-  50% {
-    transform: translateY(-10px);
-  }
-}
 
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.2;
+  .loader {
+    width: 250px;
+    height: 250px;
   }
-  50% {
-    opacity: 0.3;
-  }
-}
 
-@keyframes shimmer {
-  0% {
-    background-position: -200px 0;
+  .mainSpinner {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
   }
-  100% {
-    background-position: calc(200px + 100%) 0;
+
+  .spinnerRing {
+    border-width: 3px;
+  }
+
+  .loadingText {
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+
+  .progressContainer {
+    width: 180px;
+    height: 4px;
+  }
+
+  .loader::before {
+    width: 25px;
+    height: 25px;
   }
 }
 
@@ -765,6 +1218,32 @@
   animation: shimmer 1.5s infinite ease-in-out;
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Special effects for theme transitions */
+.loaderContainer.theme-transition {
+  animation: themeTransition 0.6s ease-in-out;
+}
+
+@keyframes themeTransition {
+  0% {
+    filter: brightness(1) contrast(1);
+  }
+  50% {
+    filter: brightness(1.2) contrast(1.1);
+  }
+  100% {
+    filter: brightness(1) contrast(1);
+  }
+}
+
 /* Print Styles */
 @media print {
   .portfolioDetail {
@@ -780,5 +1259,9 @@
   .projectCard {
     break-inside: avoid;
     margin-bottom: 1rem;
+  }
+
+  .loaderContainer {
+    display: none !important;
   }
 }

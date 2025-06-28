@@ -46,7 +46,7 @@
 
 .title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.1;

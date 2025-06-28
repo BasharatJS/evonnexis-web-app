@@ -21,6 +21,7 @@ import styles from './PortfolioDetail.module.css'
 
 const PortfolioDetail = () => {
   const [activeTab, setActiveTab] = useState('web')
+  const [isLoading, setIsLoading] = useState(false)
 
   const webProjects = [
     {
@@ -213,6 +214,22 @@ const PortfolioDetail = () => {
     },
   ]
 
+  const handleTabSwitch = (newTab) => {
+    if (newTab !== activeTab) {
+      setIsLoading(true)
+
+      // Enhanced loading with randomized duration for realism
+      const loadingDuration = 1400 + Math.random() * 600 // 1.4-2 seconds
+
+      setTimeout(() => {
+        setActiveTab(newTab)
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 350) // Smooth exit animation
+      }, loadingDuration)
+    }
+  }
+
   const currentProjects = activeTab === 'web' ? webProjects : mobileProjects
 
   const containerVariants = {
@@ -272,7 +289,8 @@ const PortfolioDetail = () => {
               className={`${styles.tabButton} ${
                 activeTab === 'web' ? styles.active : ''
               }`}
-              onClick={() => setActiveTab('web')}
+              onClick={() => handleTabSwitch('web')}
+              disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -284,7 +302,8 @@ const PortfolioDetail = () => {
               className={`${styles.tabButton} ${
                 activeTab === 'mobile' ? styles.active : ''
               }`}
-              onClick={() => setActiveTab('mobile')}
+              onClick={() => handleTabSwitch('mobile')}
+              disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -294,107 +313,200 @@ const PortfolioDetail = () => {
           </div>
         </motion.div>
 
-        {/* Projects Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            className={styles.projectsGrid}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-          >
-            {currentProjects.map((project, index) => (
+        {/* Projects Grid with Simplified Loader */}
+        <div className={styles.projectsContainer}>
+          <AnimatePresence mode="wait">
+            {isLoading ? (
+              // Simplified Beautiful Loader - Only Spinning Circles and Progress Bar
               <motion.div
-                key={project.id}
-                className={styles.projectCard}
-                variants={cardVariants}
-                whileHover={{
-                  y: -10,
-                  transition: { duration: 0.3 },
-                }}
+                key="loader"
+                className={styles.loaderContainer}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
               >
-                {/* Image Container */}
-                <div className={styles.imageContainer}>
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className={styles.projectImage}
-                  />
-                  <div
-                    className={`${styles.imageOverlay} ${
-                      styles[project.gradientClass]
-                    }`}
-                  />
-
-                  {/* Icon Badge */}
-                  <div className={styles.iconBadge}>
-                    <div
-                      className={`${styles.iconContainer} ${
-                        styles[project.gradientClass]
-                      }`}
-                    >
-                      <project.icon className={styles.icon} />
-                    </div>
+                <div className={styles.loader}>
+                  {/* Main spinner with enhanced rings */}
+                  <div className={styles.mainSpinner}>
+                    <div className={styles.spinnerRing}></div>
+                    <div className={styles.spinnerRing}></div>
+                    <div className={styles.spinnerRing}></div>
+                    <div className={styles.spinnerRing}></div>
                   </div>
 
-                  {/* Hover Actions */}
-                  <div className={styles.hoverActions}>
-                    <motion.a
-                      href={project.demoUrl}
-                      className={styles.actionButton}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
+                  {/* Loading text with enhanced animation */}
+                  <motion.div className={styles.loadingText}>
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: [0, 1, 1, 0],
+                        scale: [0.95, 1, 1, 0.95],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
                     >
-                      <ExternalLink size={20} />
-                    </motion.a>
-                    <motion.a
-                      href={project.codeUrl}
-                      className={styles.actionButtonDark}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Github size={20} />
-                    </motion.a>
-                  </div>
-                </div>
+                      Loading{' '}
+                      {activeTab === 'web'
+                        ? 'Mobile Applications'
+                        : 'Web Development'}
+                      ...
+                    </motion.span>
+                  </motion.div>
 
-                {/* Content */}
-                <div className={styles.cardContent}>
-                  <div className={styles.categoryContainer}>
-                    <span
-                      className={`${styles.category} ${
-                        styles[project.gradientClass]
-                      }`}
-                    >
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <h3 className={styles.projectTitle}>{project.title}</h3>
-                  <p className={styles.projectDescription}>
-                    {project.description}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className={styles.technologies}>
-                    {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className={styles.techTag}>
-                        {tech}
-                      </span>
-                    ))}
+                  {/* Enhanced progress bar */}
+                  <div className={styles.progressContainer}>
+                    <motion.div
+                      className={styles.progressBar}
+                      initial={{ width: '0%' }}
+                      animate={{ width: '100%' }}
+                      transition={{
+                        duration: 1.5,
+                        ease: 'easeInOut',
+                        repeat: Infinity,
+                        repeatType: 'reverse',
+                      }}
+                    />
                   </div>
 
-                  {/* Client */}
-                  <div className={styles.clientInfo}>
-                    <Users size={16} />
-                    <span>Client: {project.client}</span>
+                  {/* Enhanced background elements */}
+                  <div className={styles.backgroundElements}>
+                    <motion.div
+                      className={styles.pulseCircle}
+                      animate={{
+                        scale: [1, 1.3, 1.1, 1.4, 1],
+                        opacity: [0.1, 0.3, 0.2, 0.4, 0.1],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                    />
+                    <motion.div
+                      className={styles.pulseCircle2}
+                      animate={{
+                        scale: [1.2, 0.8, 1.1, 0.9, 1.2],
+                        opacity: [0.05, 0.25, 0.15, 0.3, 0.05],
+                        rotate: [360, 180, 0],
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: 0.5,
+                      }}
+                    />
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
+            ) : (
+              // Projects Grid
+              <motion.div
+                key={activeTab}
+                className={styles.projectsGrid}
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
+                {currentProjects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    className={styles.projectCard}
+                    variants={cardVariants}
+                    whileHover={{
+                      y: -10,
+                      transition: { duration: 0.3 },
+                    }}
+                  >
+                    {/* Image Container */}
+                    <div className={styles.imageContainer}>
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className={styles.projectImage}
+                      />
+                      <div
+                        className={`${styles.imageOverlay} ${
+                          styles[project.gradientClass]
+                        }`}
+                      />
+
+                      {/* Icon Badge */}
+                      <div className={styles.iconBadge}>
+                        <div
+                          className={`${styles.iconContainer} ${
+                            styles[project.gradientClass]
+                          }`}
+                        >
+                          <project.icon className={styles.icon} />
+                        </div>
+                      </div>
+
+                      {/* Hover Actions */}
+                      <div className={styles.hoverActions}>
+                        <motion.a
+                          href={project.demoUrl}
+                          className={styles.actionButton}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <ExternalLink size={20} />
+                        </motion.a>
+                        <motion.a
+                          href={project.codeUrl}
+                          className={styles.actionButtonDark}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <Github size={20} />
+                        </motion.a>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className={styles.cardContent}>
+                      <div className={styles.categoryContainer}>
+                        <span
+                          className={`${styles.category} ${
+                            styles[project.gradientClass]
+                          }`}
+                        >
+                          {project.category}
+                        </span>
+                      </div>
+
+                      <h3 className={styles.projectTitle}>{project.title}</h3>
+                      <p className={styles.projectDescription}>
+                        {project.description}
+                      </p>
+
+                      {/* Technologies */}
+                      <div className={styles.technologies}>
+                        {project.technologies.map((tech, techIndex) => (
+                          <span key={techIndex} className={styles.techTag}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Client */}
+                      <div className={styles.clientInfo}>
+                        <Users size={16} />
+                        <span>Client: {project.client}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* CTA Section */}
         <motion.div

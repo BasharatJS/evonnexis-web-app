@@ -29,19 +29,34 @@
 .mainTitle {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 4vw, 3rem);
+  /* font-size: clamp(3rem, 6vw, 5rem); */
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 :global(.theme-light) .mainTitle {
-  background: linear-gradient(135deg, #667eea, #764ba2, #8b5cf6);
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #8b5cf6 50%,
+    #3b82f6 75%,
+    #6366f1 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 :global(.theme-dark) .mainTitle {
-  background: linear-gradient(135deg, #8b5cf6, #a855f7, #667eea);
+  background: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #a855f7 25%,
+    #667eea 50%,
+    #22d3ee 75%,
+    #06b6d4 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
